@@ -16,6 +16,10 @@ export default class HomeScreen extends React.Component {
           title="Go to AR"
           onPress={() => this.props.navigation.navigate('AR')}
         />
+        <Button
+          title="Go to Countries"
+          onPress={() => this.props.navigation.navigate('Countries')}
+        />
       </View>
     );
   }

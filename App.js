@@ -3,11 +3,13 @@ import { View, Text } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import HomeScreen from './screens/Home';
 import AR from './screens/AR';
+import Countries from './screens/Countries';
 
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
-    AR: AR
+    AR: AR,
+    Countries: Countries
   },
   {
     initialRouteName: 'Home'
