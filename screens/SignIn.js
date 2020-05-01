@@ -5,8 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ScrollView,
-  Alert
+  Alert,
+  StyleSheet
 } from 'react-native';
 
 export default class SignIn extends Component {
@@ -37,27 +37,27 @@ export default class SignIn extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          placeholder="Type your username here"
-          onChangeText={(username) => this.setState({ username })}
-        />
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          paceholder="Type your password here"
-          secureTextEntry
-          onChangeText={(password) => this.setState({ password })}
-        />
-        <TouchableOpacity onPress={this.handleClick}>
-          <Text>Login</Text>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="username"
+            placeholderTextColor="gray"
+            onChangeText={(username) => this.setState({ username })}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="password"
+            placeholderTextColor="gray"
+            secureTextEntry
+            onChangeText={(password) => this.setState({ password })}
+          />
+        </View>
+
+        <TouchableOpacity style={styles.loginBtn} onPress={this.handleClick}>
+          <Text style={styles.loginText}>LOGIN</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -71,3 +71,38 @@ export default class SignIn extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  inputView: {
+    width: '80%',
+    borderRadius: 25,
+    borderWidth: 1,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
+    padding: 20
+  },
+  inputText: {
+    height: 50,
+    color: 'gray'
+  },
+  loginText: {
+    color: 'white'
+  },
+  loginBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10
+  }
+});
