@@ -1,27 +1,51 @@
-import React from 'react';
-import { View, Text } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
+import React, { Component } from 'react';
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createBottomTabNavigator
+} from 'react-navigation';
 import HomeScreen from './screens/Home';
 import AR from './screens/AR';
 import Countries from './screens/Countries';
 import Country from './screens/Country';
+import Login from './screens/LogIn';
+import SignIn from './screens/SignIn';
+import SignUp from './screens/SignUp';
 import ArtCard from './screens/ArtCard';
+import ProfileScreen from './screens/Profile';
 
-const RootStack = createStackNavigator(
+const AppStack = createStackNavigator({
+  Countries: Countries,
+  Country: Country,
+  ArtCard: ArtCard
+});
+
+const AuthStack = createStackNavigator({
+  Login: Login,
+  SignIn: SignIn,
+  SignUp: SignUp
+});
+
+const AppTab = createBottomTabNavigator(
   {
-    Home: HomeScreen,
-    AR: AR,
-    Countries: Countries,
-    Country: Country,
-    ArtCard: ArtCard,
+    Profile: ProfileScreen,
+    Home: AppStack,
+    AR: AR
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Home'
   }
 );
 
-export default class App extends React.Component {
+const SwitchNav = createSwitchNavigator({
+  Auth: AuthStack,
+  App: AppTab
+});
+
+export default class App extends Component {
+  state = {};
+
   render() {
-    return <RootStack />;
+    return <SwitchNav />;
   }
 }
