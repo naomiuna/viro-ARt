@@ -8,8 +8,6 @@ import {
   ScrollView,
   Alert
 } from 'react-native';
-//import {Auth} from 'aws-amplify'
-//??
 
 export default class SignIn extends Component {
   state = {
@@ -31,13 +29,21 @@ export default class SignIn extends Component {
       Alert.alert('Alert', 'Please enter username and password!');
     else {
       //aws authorisation - then if successful (catch - alert with error message)
+      //e.g. api.userSignIn(email, password).then
       this.setState({ signedIn: true });
     }
   };
 
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding">
+      <KeyboardAvoidingView
+        behavior="padding"
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
         <TextInput
           style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
           placeholder="Type your username here"
@@ -49,13 +55,13 @@ export default class SignIn extends Component {
           secureTextEntry
           onChangeText={(password) => this.setState({ password })}
         />
-        <TouchableOpacity onPress={() => this.handleClick('login')}>
+        <TouchableOpacity onPress={this.handleClick}>
           <Text>Login</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           onPress={() => {
-            this.props.navigation.navigate('Sign Up');
+            this.props.navigation.navigate('SignUp');
           }}
         >
           <Text>Create a new account</Text>
