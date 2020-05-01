@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'https://collectionapi.metmuseum.org/public/collection/v1',
+  baseURL: 'https://collectionapi.metmuseum.org/public/collection/v1'
 });
 
 export const getArtIDs = (location) => {
   return request
-    .get(`/search?geoLocaion=${location}&q=${location}`)
+    .get(`/search?geoLocaion=${location}&q=${location}&medium=Paintings`)
     .then(({ data }) => {
       return data;
     });
