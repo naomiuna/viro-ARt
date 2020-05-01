@@ -24,7 +24,7 @@ class Country extends Component {
   render() {
     const { navigation } = this.props;
     const country = navigation.getParam('country', 'default-value');
-    console.log(this.state.artImages);
+
     return (
       <View style={this.styles.container}>
         {this.state.artImages.map((image) => {
