@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import * as api from '../utils/api';
 
 class Country extends Component {
   state = {
     artCollection: [],
     location: this.props.navigation.getParam('country', 'default-value'),
+    isLoading: true,
   };
 
   componentDidMount() {
@@ -19,10 +20,12 @@ class Country extends Component {
           this.setState({ artCollection: [...this.state.artCollection, art] });
         });
       }
+      this.setState({ isLoading: false });
     });
   };
 
   render() {
+    if (this.state.isLoading) return <Text>Loading...</Text>;
     return (
       <View style={this.styles.container}>
         {this.state.artCollection.map((art) => {
