@@ -7,13 +7,15 @@ import Country from './screens/Country';
 import Login from './screens/LogIn';
 import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
+import ArtCard from './screens/ArtCard';
 
 const AppStack = createStackNavigator(
   {
     Home: HomeScreen,
     AR: AR,
     Countries: Countries,
-    Country: Country
+    Country: Country,
+    ArtCard: ArtCard
   },
   {
     initialRouteName: 'Home'
