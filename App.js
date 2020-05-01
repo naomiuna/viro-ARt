@@ -5,6 +5,7 @@ import HomeScreen from './screens/Home';
 import AR from './screens/AR';
 import Countries from './screens/Countries';
 import Country from './screens/Country';
+import ArtCard from './screens/ArtCard';
 
 const RootStack = createStackNavigator(
   {
@@ -12,6 +13,7 @@ const RootStack = createStackNavigator(
     AR: AR,
     Countries: Countries,
     Country: Country,
+    ArtCard: ArtCard,
   },
   {
     initialRouteName: 'Home',
