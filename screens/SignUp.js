@@ -27,7 +27,8 @@ export default class SignUp extends Component {
     else if (password !== confirmPassword) {
       Alert.alert("Passwords don't match", 'Please re-enter password!');
     } else {
-      //aws authorisation - SignUp - then if successful... (catch - alert with error message)
+      //aws authorisation - SignUp - then if successful...
+      //(catch - alert with error message)
       this.props.navigation.navigate('App');
     }
   };

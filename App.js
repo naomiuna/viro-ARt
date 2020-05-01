@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import { createStackNavigator, createSwitchNavigator } from 'react-navigation';
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createBottomTabNavigator
+} from 'react-navigation';
 import HomeScreen from './screens/Home';
 import AR from './screens/AR';
 import Countries from './screens/Countries';
@@ -8,19 +12,13 @@ import Login from './screens/LogIn';
 import SignIn from './screens/SignIn';
 import SignUp from './screens/SignUp';
 import ArtCard from './screens/ArtCard';
+import ProfileScreen from './screens/Profile';
 
-const AppStack = createStackNavigator(
-  {
-    Home: HomeScreen,
-    AR: AR,
-    Countries: Countries,
-    Country: Country,
-    ArtCard: ArtCard
-  },
-  {
-    initialRouteName: 'Home'
-  }
-);
+const AppStack = createStackNavigator({
+  Countries: Countries,
+  Country: Country,
+  ArtCard: ArtCard
+});
 
 const AuthStack = createStackNavigator({
   Login: Login,
@@ -28,9 +26,20 @@ const AuthStack = createStackNavigator({
   SignUp: SignUp
 });
 
+const AppTab = createBottomTabNavigator(
+  {
+    Profile: ProfileScreen,
+    Home: AppStack,
+    AR: AR
+  },
+  {
+    initialRouteName: 'Home'
+  }
+);
+
 const SwitchNav = createSwitchNavigator({
   Auth: AuthStack,
-  App: AppStack
+  App: AppTab
 });
 
 export default class App extends Component {

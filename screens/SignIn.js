@@ -28,8 +28,9 @@ export default class SignIn extends Component {
     if (!username || !password)
       Alert.alert('Alert', 'Please enter username and password!');
     else {
-      //aws authorisation - then if successful (catch - alert with error message)
+      //aws authorisation - then if successful...
       //e.g. api.userSignIn(email, password).then
+      //(catch - alert with error message)
       this.setState({ signedIn: true });
     }
   };
