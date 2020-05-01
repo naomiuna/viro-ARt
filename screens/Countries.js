@@ -7,6 +7,8 @@ import {
   ScrollView,
   FlatList,
   Button,
+  TouchableOpacity,
+  Image,
 } from 'react-native';
 
 export default class Countries extends React.Component {
@@ -38,7 +40,7 @@ export default class Countries extends React.Component {
       'Russia',
       'Spain',
       'Switzerland',
-      'Sria',
+      'Syria',
       'Thailand',
       'Turkey',
       'United Kingdom',
@@ -51,15 +53,49 @@ export default class Countries extends React.Component {
       <ScrollView style={this.styles.container}>
         {this.state.apiLocations.map((location) => {
           return (
-            <Button
-              title={location}
+            <TouchableOpacity
               onPress={() => {
                 this.props.navigation.navigate('Country', {
                   country: location,
                 });
               }}
               key={location}
-            />
+            >
+              {location === 'United Kingdom' ? (
+                <Image
+                  styles={this.styles.button}
+                  source={require('../images/united-kingdom-flag-small.jpg')}
+                />
+              ) : location === 'United States' ? (
+                <Image
+                  styles={this.styles.button}
+                  source={require('../images/united-states-of-america-flag-small.jpg')}
+                />
+              ) : location === 'Korea' ? (
+                <Image
+                  styles={this.styles.button}
+                  source={require('../images/south-korea-flag-small.jpg')}
+                />
+              ) : location === 'Czech Republic' ? (
+                <Image
+                  styles={this.styles.button}
+                  source={require('../images/czech-republic-flag-small.jpg')}
+                />
+              ) : (
+                // <Image
+                //   style={this.styles.button}
+                //   source={require(`../images/${location}-flag-small.jpg`)}
+                // />
+                <Button
+                  title={`${location}`}
+                  onPress={() => {
+                    this.props.navigation.navigate('Country', {
+                      country: location,
+                    });
+                  }}
+                />
+              )}
+            </TouchableOpacity>
           );
         })}
       </ScrollView>
@@ -76,8 +112,8 @@ export default class Countries extends React.Component {
       height: 44,
     },
     button: {
-      height: 10,
-      width: 10,
+      height: 100,
+      width: 200,
     },
   });
 }

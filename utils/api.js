@@ -14,6 +14,19 @@ export const getArtIDs = (location) => {
 
 export const getArt = (id) => {
   return request.get(`/objects/${id}`).then(({ data }) => {
-    return data;
+    const art = {};
+    art.primaryImage = data.primaryImage;
+    art.title = data.title;
+    art.department = data.department;
+    art.artistDisplayName = data.artistDisplayName;
+    art.artistDisplayBio = data.artistDisplayBio;
+    art.culture = data.culture;
+    art.period = data.period;
+    art.artistGender = data.artistGender;
+    art.artistWikidata_URL = data.artistWikidata_URL;
+    art.objectDate = data.objectDate;
+    art.objectURL = data.objectDate;
+    art.repository = data.repository;
+    return art;
   });
 };

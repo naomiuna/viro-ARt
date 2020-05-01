@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, Button, Image } from 'react-native';
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 import * as api from '../utils/api';
 
 class Country extends Component {
-  state = { artImages: [], objectIDs: [], location: 'France' };
+  state = {
+    artCollection: [],
+    location: this.props.navigation.getParam('country', 'default-value'),
+    isLoading: true,
+  };
 
   componentDidMount() {
     this.fetchArtUrl();
@@ -11,36 +15,42 @@ class Country extends Component {
 
   fetchArtUrl = () => {
     api.getArtIDs(this.state.location).then((objectIDs) => {
-      this.setState({ objectIDs: objectIDs.objectIDs });
-      for (let i = 0; i < 5; i++) {
-        api.getArt(this.state.objectIDs[i]).then((art) => {
-          const url = art.primaryImage;
-          this.setState({ artImages: [...this.state.artImages, url] });
+      for (let i = 0; i < 12; i++) {
+        api.getArt(objectIDs.objectIDs[i]).then((art) => {
+          this.setState({ artCollection: [...this.state.artCollection, art] });
         });
       }
+      this.setState({ isLoading: false });
     });
   };
 
   render() {
-    const { navigation } = this.props;
-    const country = navigation.getParam('country', 'default-value');
-
+    if (this.state.isLoading) return <Text>Loading...</Text>;
     return (
       <View style={this.styles.container}>
-        {this.state.artImages.map((image) => {
+        {this.state.artCollection.map((art) => {
           return (
-            <Image
-              style={{ width: 100, height: 100 }}
-              source={{ uri: image }}
-              key={image}
-            />
+            <TouchableOpacity
+              key={art.objectID}
+              onPress={() => {
+                this.props.navigation.navigate('ArtCard', {
+                  artObject: art,
+                });
+              }}
+            >
+              <Image
+                style={{ width: 130, height: 200 }}
+                source={{ uri: art.primaryImage }}
+                key={art.objectID}
+              />
+            </TouchableOpacity>
           );
         })}
       </View>
     );
   }
   styles = StyleSheet.create({
-    container: { flex: 1 },
+    container: { flex: 1, flexWrap: 'wrap' },
   });
 }
 
