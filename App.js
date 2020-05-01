@@ -4,15 +4,17 @@ import { createStackNavigator } from 'react-navigation';
 import HomeScreen from './screens/Home';
 import AR from './screens/AR';
 import Countries from './screens/Countries';
+import Country from './screens/Country';
 
 const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     AR: AR,
-    Countries: Countries
+    Countries: Countries,
+    Country: Country,
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
   }
 );
 
