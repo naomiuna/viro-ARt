@@ -13,7 +13,10 @@ const ArtCard = (props) => {
         <Text>Title: {artObject.title}</Text>
         <Text>Artist: {artObject.artistDisplayName}</Text>
         <Text>Date: {artObject.objectDate}</Text>
-        <Text>Period art was created: {artObject.period}</Text>
+        <Text>
+          Period art was created:
+          {artObject.period.length === 0 ? 'N/A' : artObject.period}
+        </Text>
         <Text>Art location: {artObject.repository}</Text>
       </View>
       <Button title="Save Art to Gallery" />
