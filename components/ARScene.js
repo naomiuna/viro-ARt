@@ -15,12 +15,17 @@ import {
 export default class ARScene extends Component {
   state = {
     text: 'Initializing AR...',
-    loading: true,
-    chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg'
+    loading: true
+    // chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg'
   };
 
   render() {
-    const { text, loading, chosenArt } = this.state;
+    const { text, loading } = this.state;
+    const {
+      sceneNavigator: {
+        viroAppProps: { chosenArt }
+      }
+    } = this.props;
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
         {loading ? (
