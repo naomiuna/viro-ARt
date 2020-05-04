@@ -1,5 +1,12 @@
 import React from 'react';
-import { FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import {
+  View,
+  FlatList,
+  TouchableOpacity,
+  Image,
+  StyleSheet,
+  Alert
+} from 'react-native';
 
 const keyExtractor = (item, index) => item.objectID;
 
@@ -10,28 +17,37 @@ const ArtList = (props) => {
       numColumns={3}
       keyExtractor={keyExtractor}
       renderItem={({ item }) => (
-        <TouchableOpacity
-          key={item.objectID}
-          style={{ padding: 5 }}
-          onPress={() => {
-            props.navigation.navigate('ArtCard', {
-              artObject: item,
-            });
-          }}
-        >
-          <Image
-            style={styles.image}
-            source={{ uri: item.primaryImage }}
+        <View style={{ flex: 1, flexDirection: 'column', margin: 2 }}>
+          <TouchableOpacity
             key={item.objectID}
-          />
-        </TouchableOpacity>
+            style={{ flex: 1 }}
+            onPress={() => {
+              if (props.type === 'country') {
+                props.navigation.navigate('ArtCard', {
+                  artObject: item
+                });
+              } else {
+                Alert.alert('image pressed');
+              }
+            }}
+          >
+            <Image
+              style={styles.image}
+              source={{ uri: item.primaryImage }}
+              key={item.objectID}
+            />
+          </TouchableOpacity>
+        </View>
       )}
     />
   );
 };
 
 const styles = StyleSheet.create({
-  image: { width: 130, height: 200, padding: 5 },
+  image: {
+    width: '100%',
+    height: 120
+  }
 });
 
 export default ArtList;

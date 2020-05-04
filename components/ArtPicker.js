@@ -13,17 +13,19 @@ export default class ArtPicker extends Component {
   state = {
     artData: [
       {
-        img: 'https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg',
-        id: '436535'
+        primaryImage:
+          'https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg',
+        objectID: '436535'
       },
       {
-        img: 'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg',
-        id: '436528'
+        primaryImage:
+          'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg',
+        objectID: '436528'
       },
       {
-        img:
+        primaryImage:
           'https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg',
-        id: '436532'
+        objectID: '436532'
       }
     ],
     isLoading: false
@@ -32,7 +34,6 @@ export default class ArtPicker extends Component {
   //component did mount - fetch users saved art - set loading to false
 
   render() {
-    //method to  add to ARScene on  props
     const { artData, isLoading } = this.state;
     const { updateChosenArt } = this.props;
     return (
@@ -44,28 +45,30 @@ export default class ArtPicker extends Component {
             numColumns={1}
             data={artData}
             renderItem={({ item }) => (
-              <ArtItem updateChosenArt={updateChosenArt} img={item.img} />
+              <ArtItem
+                updateChosenArt={updateChosenArt}
+                primaryImage={item.primaryImage}
+              />
             )}
-            keyExtractor={(item) => item.id}
+            keyExtractor={(item) => item.objectID}
           ></FlatList>
         )}
       </View>
     );
   }
-
-  onClick = () => {
-    Alert.alert('image clicked!');
-  };
 }
 
-function ArtItem({ img, updateChosenArt }) {
+function ArtItem({ primaryImage, updateChosenArt }) {
   return (
     <View style={styles.artItem}>
       <TouchableOpacity
         style={{ flex: 1, flexDirection: 'row' }}
-        onPress={() => updateChosenArt(img)}
+        onPress={() => updateChosenArt(primaryImage)}
       >
-        <Image source={{ uri: img }} style={{ width: 130, height: 200 }} />
+        <Image
+          source={{ uri: primaryImage }}
+          style={{ width: 130, height: 200 }}
+        />
       </TouchableOpacity>
     </View>
   );
