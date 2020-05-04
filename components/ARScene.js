@@ -13,44 +13,40 @@ import {
 } from 'react-viro';
 
 export default class ARScene extends Component {
-  constructor() {
-    super();
-
-    // Set initial state here
-    this.state = {
-      text: 'Initializing AR...',
-      loading: true,
-      chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DT5475.jpg'
-    };
-
-    // bind 'this' to functions
-    this._onInitialized = this._onInitialized.bind(this);
-  }
+  state = {
+    text: 'Initializing AR...',
+    loading: true
+    // chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg'
+  };
 
   render() {
-    const { text, loading, chosenArt } = this.state;
+    const { text, loading } = this.state;
+    const {
+      sceneNavigator: {
+        viroAppProps: { chosenArt }
+      }
+    } = this.props;
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized}>
-        {loading && (
+        {loading ? (
           <ViroText
             text={text}
             scale={[0.5, 0.5, 0.5]}
             position={[0, 0, -1]}
             style={styles.helloWorldTextStyle}
           />
+        ) : (
+          <ViroImage
+            scale={[0.5, 0.5, 0.5]}
+            position={[0, 0, -1]}
+            source={{ uri: chosenArt }}
+          />
         )}
-        {/* <ViroARPlaneSelector> */}
-        <ViroImage
-          scale={[0.5, 0.5, 0.5]}
-          position={[0, 0, -1]}
-          source={{ uri: chosenArt }}
-        />
-        {/* </ViroARPlaneSelector> */}
       </ViroARScene>
     );
   }
 
-  _onInitialized(state, reason) {
+  _onInitialized = (state, reason) => {
     if (state == ViroConstants.TRACKING_NORMAL) {
       this.setState({
         loading: false
@@ -58,7 +54,7 @@ export default class ARScene extends Component {
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }
-  }
+  };
 }
 
 var styles = StyleSheet.create({
