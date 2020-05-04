@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 
 export default class LogIn extends Component {
   render() {
     return (
-      <View
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
+      <View style={styles.container}>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('SignIn')}
+          style={styles.btn}
         >
-          <Text>Login</Text>
+          <Text style={styles.btnText}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('SignUp')}
+          style={styles.btn}
         >
-          <Text>Sign Up</Text>
+          <Text style={styles.btnText}>SIGN UP</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  btn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10
+  },
+  btnText: {
+    color: 'white'
+  }
+});

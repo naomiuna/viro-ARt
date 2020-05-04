@@ -5,8 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ScrollView,
-  Alert
+  Alert,
+  StyleSheet
 } from 'react-native';
 
 export default class SignUp extends Component {
@@ -35,55 +35,47 @@ export default class SignUp extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView
-        behavior="padding"
-        style={{
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
-      >
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1
-          }}
-          placeholder="Type your email here"
-          keyboardType="email-address"
-          onChangeText={(email) => this.setState({ email })}
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1
-          }}
-          placeholder="Type your username here"
-          onChangeText={(username) => this.setState({ username })}
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1
-          }}
-          paceholder="Type your password here"
-          secureTextEntry
-          onChangeText={(password) => this.setState({ password })}
-        />
-        <TextInput
-          style={{
-            height: 40,
-            borderColor: 'gray',
-            borderWidth: 1
-          }}
-          paceholder="Confirm password"
-          secureTextEntry
-          onChangeText={(confirmPassword) => this.setState({ confirmPassword })}
-        />
-        <TouchableOpacity onPress={this.handleClick}>
-          <Text>Sign Up</Text>
+      <KeyboardAvoidingView behavior="padding" style={styles.container}>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="email"
+            placeholderTextColor="gray"
+            keyboardType="email-address"
+            onChangeText={(email) => this.setState({ email })}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="username"
+            placeholderTextColor="gray"
+            onChangeText={(username) => this.setState({ username })}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="password"
+            placeholderTextColor="gray"
+            secureTextEntry
+            onChangeText={(password) => this.setState({ password })}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
+            placeholder="confirm password"
+            placeholderTextColor="gray"
+            secureTextEntry
+            onChangeText={(confirmPassword) =>
+              this.setState({ confirmPassword })
+            }
+          />
+        </View>
+
+        <TouchableOpacity style={styles.signinBtn} onPress={this.handleClick}>
+          <Text style={styles.signinText}>Sign Up</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -97,3 +89,38 @@ export default class SignUp extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  inputView: {
+    width: '80%',
+    borderRadius: 25,
+    borderWidth: 1,
+    height: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
+    padding: 20
+  },
+  inputText: {
+    height: 50,
+    color: 'gray'
+  },
+  signinText: {
+    color: 'white'
+  },
+  signinBtn: {
+    width: '80%',
+    backgroundColor: '#fb5b5a',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 40,
+    marginBottom: 10
+  }
+});
