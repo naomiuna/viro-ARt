@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, TouchableHighlight } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacity
+} from 'react-native';
 
 import { ViroARSceneNavigator } from 'react-viro';
 
@@ -40,18 +46,16 @@ export default class ViroSample extends Component {
   // Presents the user with a choice of an AR or VR experience
   _getExperienceSelector() {
     return (
-      <View style={localStyles.outer}>
-        <View style={localStyles.inner}>
-          <Text style={localStyles.titleText}>
-            Choose your desired experience:
-          </Text>
+      <View style={styles.outer}>
+        <View style={styles.inner}>
+          <Text style={styles.titleText}>Choose your desired experience:</Text>
 
           <TouchableHighlight
-            style={localStyles.buttons}
+            style={styles.buttons}
             onPress={this._getExperienceButtonOnPress(AR_NAVIGATOR_TYPE)}
             underlayColor={'#68a0ff'}
           >
-            <Text style={localStyles.buttonText}>AR</Text>
+            <Text style={styles.buttonText}>AR</Text>
           </TouchableHighlight>
         </View>
       </View>
@@ -64,7 +68,7 @@ export default class ViroSample extends Component {
       <ViroARSceneNavigator
         {...this.state.sharedProps}
         initialScene={{ scene: AR }}
-      />
+      ></ViroARSceneNavigator>
     );
   }
 
@@ -86,7 +90,7 @@ export default class ViroSample extends Component {
   }
 }
 
-var localStyles = StyleSheet.create({
+var styles = StyleSheet.create({
   viroContainer: {
     flex: 1,
     backgroundColor: 'black'
