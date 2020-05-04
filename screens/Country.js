@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Text,
-  ScrollView,
-  FlatList,
-} from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import * as api from '../utils/api';
+import ArtList from '../components/ArtList';
 
 class Country extends Component {
   state = {
@@ -32,32 +25,13 @@ class Country extends Component {
     });
   };
 
-  keyExtractor = (item, index) => item.objectID;
-
   render() {
     if (this.state.isLoading) return <Text>Loading...</Text>;
     return (
       <View style={this.styles.container}>
-        <FlatList
-          data={this.state.artCollection}
-          numColumns={3}
-          keyExtractor={this.keyExtractor}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              key={item.objectID}
-              onPress={() => {
-                this.props.navigation.navigate('ArtCard', {
-                  artObject: item,
-                });
-              }}
-            >
-              <Image
-                style={{ width: 100, height: 200 }}
-                source={{ uri: item.primaryImage }}
-                key={item.objectID}
-              />
-            </TouchableOpacity>
-          )}
+        <ArtList
+          art={this.state.artCollection}
+          navigation={this.props.navigation}
         />
       </View>
     );
