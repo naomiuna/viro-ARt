@@ -4,7 +4,6 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  ImageBackground,
   Alert,
   TouchableOpacity,
   Text
@@ -35,14 +34,18 @@ export default class ArtPicker extends Component {
   render() {
     //method to  add to ARScene on  props
     const { artData, isLoading } = this.state;
+    const { updateChosenArt } = this.props;
     return (
       <View style={styles.container}>
         {isLoading ? (
           <Text>Fetching your favourite art</Text>
         ) : (
           <FlatList
+            numColumns={1}
             data={artData}
-            renderItem={({ item }) => <ArtItem img={item.img} />}
+            renderItem={({ item }) => (
+              <ArtItem updateChosenArt={updateChosenArt} img={item.img} />
+            )}
             keyExtractor={(item) => item.id}
           ></FlatList>
         )}
@@ -55,22 +58,31 @@ export default class ArtPicker extends Component {
   };
 }
 
-function ArtItem({ img }) {
+function ArtItem({ img, updateChosenArt }) {
   return (
-    <View>
-      <TouchableOpacity style={{ width: 130, height: 200 }}>
-        <Image source={{ uri: img }} />
+    <View style={styles.artItem}>
+      <TouchableOpacity
+        style={{ flex: 1, flexDirection: 'row' }}
+        onPress={() => updateChosenArt(img)}
+      >
+        <Image source={{ uri: img }} style={{ width: 130, height: 200 }} />
       </TouchableOpacity>
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'transparent',
-    width: 200,
+    backgroundColor: 'rgba(150,150,150,0.5)',
+    width: 300,
     alignItems: 'center',
     position: 'absolute',
     right: -100,
     height: '100%'
+  },
+  artItem: {
+    height: 175,
+    alignItems: 'center',
+    margin: 3,
+    borderRadius: 2
   }
 });
