@@ -7,7 +7,7 @@ class Country extends Component {
   state = {
     artCollection: [],
     location: this.props.navigation.getParam('country', 'default-value'),
-    isLoading: true,
+    isLoading: true
   };
 
   componentDidMount() {
@@ -32,6 +32,7 @@ class Country extends Component {
         <ArtList
           art={this.state.artCollection}
           navigation={this.props.navigation}
+          type="country"
         />
       </View>
     );
@@ -39,9 +40,8 @@ class Country extends Component {
   styles = StyleSheet.create({
     container: {
       flex: 1,
-      paddingTop: 22,
-      alignItems: 'center',
-    },
+      paddingTop: 22
+    }
   });
 }
 
