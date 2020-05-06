@@ -18,6 +18,7 @@ export default class ARScene extends Component {
   state = {
     text: "Initializing AR...",
     loading: true,
+    scale: [0.5, 0.5, 0.5],
     // chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg'
   };
 
@@ -33,20 +34,18 @@ export default class ARScene extends Component {
         onTrackingUpdated={this._onInitialized}
         anchorDetectionTypes="PlanesVertical"
       >
-        <ViroARPlaneSelector alignment="Vertical">
-          <ViroNode
-            position={[0, 0, 0]}
-            dragType="FixedToWorld"
-            onDrag={() => {}}
-          >
-            <ViroImage
-              scale={[0.5, 0.5, 0.5]}
-              position={[1, 0, -1]}
-              rotation={[-90, -90, 0]}
-              source={{ uri: chosenArt }}
-            />
-          </ViroNode>
-        </ViroARPlaneSelector>
+        <ViroNode
+          onPinch={this._onPinch}
+          position={[0, 0, 0]}
+          dragType="FixedToWorld"
+          onDrag={() => {}}
+        >
+          <ViroImage
+            scale={this.state.scale}
+            position={[0, 0, -2]}
+            source={{ uri: chosenArt }}
+          />
+        </ViroNode>
       </ViroARScene>
     );
   }
@@ -60,11 +59,27 @@ export default class ARScene extends Component {
       // Handle loss of tracking
     }
   };
+  _onPinch = (pinchState, scaleFactor, source) => {
+    console.log(scaleFactor);
+    let newScale = [
+      this.state.scale[0] * scaleFactor,
+      this.state.scale[1] * scaleFactor,
+      this.state.scale[2] * scaleFactor,
+    ];
+
+    if (pinchState == 3) {
+      this.setState({
+        scale: newScale,
+      });
+
+      return;
+    }
+  };
   onSelect = () => {
     return (
       <ViroImage
         scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
+        position={[0, -0.1, -1]}
         source={{ uri: chosenArt }}
       />
     );
