@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Image,
   StyleSheet,
-  Alert
+  Alert,
 } from 'react-native';
 
 const keyExtractor = (item, index) => item.objectID;
@@ -24,7 +24,7 @@ const ArtList = (props) => {
             onPress={() => {
               if (props.type === 'country') {
                 props.navigation.navigate('ArtCard', {
-                  artObject: item
+                  artObject: item,
                 });
               } else {
                 Alert.alert('image pressed');
@@ -46,8 +46,8 @@ const ArtList = (props) => {
 const styles = StyleSheet.create({
   image: {
     width: '100%',
-    height: 120
-  }
+    height: 120,
+  },
 });
 
 export default ArtList;
