@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 
 class ArtList extends Component {
+  state = {
+    refreshing: false
+  };
   render() {
     return (
       <FlatList
@@ -15,6 +18,12 @@ class ArtList extends Component {
         numColumns={3}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderItem}
+        refreshing={this.state.refreshing}
+        onRefresh={() => {
+          if (this.props.type === 'profile') {
+            this.props.fetchArt();
+          }
+        }}
       />
     );
   }
