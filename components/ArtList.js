@@ -14,7 +14,6 @@ class ArtList extends Component {
         data={this.props.art}
         numColumns={3}
         keyExtractor={this.keyExtractor}
-        maxToRenderPerBatch={15}
         renderItem={this.renderItem}
       />
     );
@@ -31,6 +30,11 @@ class ArtList extends Component {
             this.props.navigation.navigate('ArtCard', {
               artObject: item
             });
+          }
+        }}
+        refreshControl={() => {
+          if (this.props.type === 'profile') {
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />;
           }
         }}
       >
