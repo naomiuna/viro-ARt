@@ -11,19 +11,22 @@ import {
 import { ViroARSceneNavigator } from "react-viro";
 import ARScene from "../components/ARScene";
 import ArtPicker from "../components/ArtPicker";
+import EditArtMenu from "../components/EditArtMenu";
 
 export default class ViroSample extends Component {
   state = {
     showMenu: false,
     chosenArt: [],
+    editMenu: false,
+    currentArtPiece: "",
   };
   render() {
-    const { showMenu, chosenArt } = this.state;
+    const { showMenu, chosenArt, editMenu, currentArtPiece } = this.state;
     return (
       <View style={styles.container}>
         <ViroARSceneNavigator
           initialScene={{ scene: ARScene }}
-          viroAppProps={{ chosenArt }}
+          viroAppProps={[{ chosenArt }, this.showEditMenu]}
         />
         <TouchableOpacity
           activeOpacity={0.7}
@@ -39,18 +42,40 @@ export default class ViroSample extends Component {
           />
         </TouchableOpacity>
         {showMenu && <ArtPicker updateChosenArt={this.updateChosenArt} />}
+        {editMenu && <EditArtMenu deleteMethod={this.deleteArt} />}
       </View>
     );
   }
   toggleMenu = () => {
     this.setState((prevState) => ({
       showMenu: !prevState.showMenu,
+      editMenu: false,
     }));
   };
 
   updateChosenArt = (newArt) => {
     const joined = this.state.chosenArt.concat(newArt);
     this.setState({ chosenArt: joined });
+  };
+  showEditMenu = (artPiece) => {
+    console.log(artPiece);
+
+    this.setState((prevState) => {
+      return { showMenu: false, editMenu: true, currentArtPiece: artPiece };
+    });
+  };
+
+  closeEditMenu = () => {
+    this.setState({ editMenu: false });
+  };
+
+  deleteArt = () => {
+    const { chosenArt, currentArtPiece } = this.state;
+    const newArt = chosenArt.filter((art) => {
+      if (art !== currentArtPiece) return art;
+    });
+
+    this.setState({ chosenArt: newArt });
   };
 }
 

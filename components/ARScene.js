@@ -23,10 +23,11 @@ export default class ARScene extends Component {
   };
 
   render() {
+    console.log(this.props);
     const { text, loading } = this.state;
     const {
       sceneNavigator: {
-        viroAppProps: { chosenArt },
+        viroAppProps: [{ chosenArt }, showEditMenu],
       },
     } = this.props;
     return (
@@ -40,12 +41,14 @@ export default class ARScene extends Component {
             if (typeof artPiece === "string") rightArt = artPiece;
             return (
               <ViroNode
-                onPinch={this._onPinch}
                 position={[0, 0, 0]}
                 dragType="FixedToWorld"
                 onDrag={() => {}}
               >
                 <ViroImage
+                  onClick={() => {
+                    showEditMenu(rightArt);
+                  }}
                   scale={this.state.scale}
                   position={[0, 0, -2]}
                   source={{ uri: rightArt }}
@@ -82,6 +85,8 @@ export default class ARScene extends Component {
       return;
     }
   };
+  onClick = () => {};
+
   onSelect = () => {
     return (
       <ViroImage
