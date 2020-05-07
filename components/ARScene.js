@@ -34,18 +34,25 @@ export default class ARScene extends Component {
         onTrackingUpdated={this._onInitialized}
         anchorDetectionTypes="PlanesVertical"
       >
-        <ViroNode
-          onPinch={this._onPinch}
-          position={[0, 0, 0]}
-          dragType="FixedToWorld"
-          onDrag={() => {}}
-        >
-          <ViroImage
-            scale={this.state.scale}
-            position={[0, 0, -2]}
-            source={{ uri: chosenArt }}
-          />
-        </ViroNode>
+        {chosenArt &&
+          chosenArt.map((artPiece) => {
+            let rightArt = "";
+            if (typeof artPiece === "string") rightArt = artPiece;
+            return (
+              <ViroNode
+                onPinch={this._onPinch}
+                position={[0, 0, 0]}
+                dragType="FixedToWorld"
+                onDrag={() => {}}
+              >
+                <ViroImage
+                  scale={this.state.scale}
+                  position={[0, 0, -2]}
+                  source={{ uri: rightArt }}
+                />
+              </ViroNode>
+            );
+          })}
       </ViroARScene>
     );
   }
@@ -64,7 +71,7 @@ export default class ARScene extends Component {
     let newScale = [
       this.state.scale[0] * scaleFactor,
       this.state.scale[1] * scaleFactor,
-      this.state.scale[2] * scaleFactor,
+      this.state.scale[2] * (scaleFactor / 2),
     ];
 
     if (pinchState == 3) {
@@ -86,7 +93,7 @@ export default class ARScene extends Component {
   };
 }
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
   helloWorldTextStyle: {
     fontFamily: "Arial",
     fontSize: 30,

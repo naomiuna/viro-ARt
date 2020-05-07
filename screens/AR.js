@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
   Alert,
-  Image
-} from 'react-native';
+  Image,
+} from "react-native";
 
-import { ViroARSceneNavigator } from 'react-viro';
-import ARScene from '../components/ARScene';
-import ArtPicker from '../components/ArtPicker';
+import { ViroARSceneNavigator } from "react-viro";
+import ARScene from "../components/ARScene";
+import ArtPicker from "../components/ArtPicker";
 
 export default class ViroSample extends Component {
   state = {
     showMenu: false,
-    chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg'
+    chosenArt: [],
   };
   render() {
     const { showMenu, chosenArt } = this.state;
@@ -33,7 +33,7 @@ export default class ViroSample extends Component {
           <Image
             source={{
               uri:
-                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png'
+                "https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png",
             }}
             style={styles.FloatingButtonStyle}
           />
@@ -44,34 +44,35 @@ export default class ViroSample extends Component {
   }
   toggleMenu = () => {
     this.setState((prevState) => ({
-      showMenu: !prevState.showMenu
+      showMenu: !prevState.showMenu,
     }));
   };
 
-  updateChosenArt = (chosenArt) => {
-    this.setState({ chosenArt });
+  updateChosenArt = (newArt) => {
+    const joined = this.state.chosenArt.concat(newArt);
+    this.setState({ chosenArt: joined });
   };
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   TouchableOpacityStyle: {
-    position: 'absolute',
+    position: "absolute",
     width: 50,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     left: 30,
-    top: 30
+    top: 30,
   },
 
   FloatingButtonStyle: {
-    resizeMode: 'contain',
+    resizeMode: "contain",
     width: 50,
-    height: 50
-  }
+    height: 50,
+  },
 });
 
 module.exports = ViroSample;
