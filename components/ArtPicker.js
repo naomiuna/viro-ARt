@@ -18,7 +18,11 @@ export default class ArtPicker extends Component {
   };
 
   componentDidMount() {
-    api.getUserArt(this.state.username).then((artData) => {
+    api.getUserArt(this.state.username).then((userData) => {
+      const artArray = userData.Item.userArtArray;
+      const artData = artArray.map((art) => {
+        return { objectID: Date.now(), primaryImage: art };
+      });
       this.setState({ artData, isLoading: false });
     });
   }
