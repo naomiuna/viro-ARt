@@ -14,15 +14,12 @@ export default class ArtPicker extends Component {
   state = {
     artData: [],
     isLoading: true,
-    username: 'something97',
+    username: 'jessjelly',
   };
 
   componentDidMount() {
-    api.getUserArt().then((artData) => {
-      const formattedArtData = artData.map((art) => {
-        return { primaryImage: art.image_url, objectID: art.id };
-      });
-      this.setState({ artData: formattedArtData, isLoading: false });
+    api.getUserArt(this.state.username).then((artData) => {
+      this.setState({ artData, isLoading: false });
     });
   }
 

@@ -5,16 +5,17 @@ import * as api from '../utils/apiAWS';
 
 export default class ProfileScreen extends Component {
   state = {
-    username: 'something97',
+    username: 'jessjelly',
     artData: [],
   };
 
   componentDidMount() {
-    api.getUserArt().then((artData) => {
-      const formattedArtData = artData.map((art) => {
-        return { primaryImage: art.image_url, objectID: art.id };
+    api.getUserArt(this.state.username).then((userData) => {
+      const artArray = userData.Item.userArtArray;
+      const artData = artArray.map((art) => {
+        return { objectID: Date.now(), primaryImage: art };
       });
-      this.setState({ artData: formattedArtData });
+      this.setState({ artData });
     });
   }
 

@@ -3,7 +3,7 @@ import { Text, Image, View, StyleSheet, Button } from 'react-native';
 import * as api from '../utils/apiAWS.js';
 
 class ArtCard extends Component {
-  state = { username: 'something97', artObject: {} };
+  state = { username: 'jessjelly', artObject: {} };
 
   componentDidMount() {
     this.setState({
@@ -34,9 +34,9 @@ class ArtCard extends Component {
     const { username, artObject } = this.state;
     const body = {
       username,
-      image_url: artObject.primaryImage,
-      id: artObject.objectID.toString(),
+      primaryImage: artObject.primaryImage,
     };
+    console.log(body);
     return api
       .postUserArt(body)
       .then(() => console.log('artAdded'))
