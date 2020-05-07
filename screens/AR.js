@@ -1,23 +1,23 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   Text,
   View,
   StyleSheet,
   TouchableOpacity,
   Alert,
-  Image,
-} from "react-native";
+  Image
+} from 'react-native';
 
-import { ViroARSceneNavigator, ViroButton } from "react-viro";
-import ARScene from "../components/ARScene";
-import ArtPicker from "../components/ArtPicker";
+import { ViroARSceneNavigator, ViroButton } from 'react-viro';
+import ARScene from '../components/ARScene';
+import ArtPicker from '../components/ArtPicker';
 
 export default class ViroSample extends Component {
   state = {
     showMenu: false,
     chosenArt:
-      "https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg",
-    screenshot: true,
+      'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg',
+    screenshot: true
   };
   render() {
     const { showMenu, chosenArt } = this.state;
@@ -36,7 +36,7 @@ export default class ViroSample extends Component {
           <Image
             source={{
               uri:
-                "https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png",
+                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png'
             }}
             style={styles.FloatingButtonStyle}
           />
@@ -48,7 +48,7 @@ export default class ViroSample extends Component {
           style={styles2.TouchableOpacityStyle}
         >
           <Image
-            source={require("../images/camera.jpg")}
+            source={require('../images/camera.jpg')}
             style={styles.FloatingButtonStyle}
           />
         </TouchableOpacity>
@@ -57,13 +57,17 @@ export default class ViroSample extends Component {
   }
   toggleMenu = () => {
     this.setState((prevState) => ({
-      showMenu: !prevState.showMenu,
+      showMenu: !prevState.showMenu
     }));
   };
 
-  screenShot = () => {
-    this.ARSceneNav.sceneNavigator.takeScreenshot("photo", true);
-    Alert.alert("Save to photo!");
+  screenShot = async () => {
+    const response = await this.ARSceneNav.sceneNavigator.takeScreenshot(
+      'photo',
+      true
+    );
+    console.log(response);
+    Alert.alert('Saved to camera roll!');
   };
 
   updateChosenArt = (chosenArt) => {
@@ -73,44 +77,44 @@ export default class ViroSample extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   TouchableOpacityStyle: {
-    position: "absolute",
+    position: 'absolute',
     width: 50,
     height: 50,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     left: 30,
-    top: 30,
+    top: 30
   },
 
   FloatingButtonStyle: {
-    resizeMode: "contain",
+    resizeMode: 'contain',
     width: 50,
-    height: 50,
-  },
+    height: 50
+  }
 });
 
 const styles2 = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   TouchableOpacityStyle: {
-    position: "absolute",
+    position: 'absolute',
     width: 50,
     height: 50,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     left: 30,
-    top: 100,
+    top: 100
   },
 
   FloatingButtonStyle: {
-    resizeMode: "contain",
+    resizeMode: 'contain',
     width: 50,
-    height: 50,
-  },
+    height: 50
+  }
 });
 
 module.exports = ViroSample;
