@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
 import * as api from '../utils/api';
 import ArtList from '../components/ArtList';
 
@@ -26,7 +26,12 @@ class Country extends Component {
   };
 
   render() {
-    if (this.state.isLoading) return <Text>Loading...</Text>;
+    if (this.state.isLoading)
+      return (
+        <View style={this.styles.loading}>
+          <Image source={require('../images/Earth-5.9s-204px.gif')} />
+        </View>
+      );
     return (
       <View style={this.styles.container}>
         <ArtList
@@ -41,6 +46,11 @@ class Country extends Component {
     container: {
       flex: 1,
       paddingTop: 22
+    },
+    loading: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
     }
   });
 }
