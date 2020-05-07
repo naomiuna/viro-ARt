@@ -32,11 +32,6 @@ class ArtList extends Component {
             });
           }
         }}
-        refreshControl={() => {
-          if (this.props.type === 'profile') {
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />;
-          }
-        }}
       >
         <Image
           style={styles.image}
