@@ -66,7 +66,6 @@ export default class ViroSample extends Component {
       'photo',
       true
     );
-    console.log(response);
     Alert.alert('Saved to camera roll!');
   };
 
