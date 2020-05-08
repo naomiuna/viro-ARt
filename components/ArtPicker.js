@@ -77,11 +77,12 @@ function ArtItem({ primaryImage, updateChosenArt }) {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(150,150,150,0.5)',
-    width: 300,
+    backgroundColor: '#eafff980',
+    width: 200,
     alignItems: 'center',
+    justifyContent: 'center',
     position: 'absolute',
-    right: -100,
+    right: 0,
     height: '100%'
   },
   artItem: {
