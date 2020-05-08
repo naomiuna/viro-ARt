@@ -22,7 +22,7 @@ export default class EditArtMenu extends Component {
   };
   render() {
     const { Data, isLoading } = this.state;
-
+    const { deleteMethod, closeEditMenu, editScale } = this.props;
     return (
       <View style={styles.container}>
         {isLoading ? (
@@ -31,12 +31,14 @@ export default class EditArtMenu extends Component {
           <FlatList
             numColumns={1}
             data={Data}
-            renderItem={({ item }) => (
+            renderItem={({ item }) => [
               <Button
                 primaryImage={item.primaryImage}
-                deleteArt={this.props.deleteMethod}
-              />
-            )}
+                deleteArt={deleteMethod}
+              />,
+              <CloseMenu closeEditMenu={closeEditMenu} />,
+              <EditScale editScale={editScale} />,
+            ]}
             keyExtractor={(item) => item.objectID}
           ></FlatList>
         )}
@@ -60,11 +62,48 @@ function Button({ primaryImage, deleteArt }) {
     </View>
   );
 }
+function CloseMenu({ closeEditMenu }) {
+  return (
+    <View style={styles.artItem}>
+      <TouchableOpacity
+        style={{ flex: 1, flexDirection: "row" }}
+        onPress={() => closeEditMenu()}
+      >
+        <Text>Close Menu</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
+
+function EditScale({ editScale }) {
+  return (
+    <View>
+      <TouchableOpacity
+        style={{ flex: 1, flexDirection: "row" }}
+        onPress={() => editScale("Large")}
+      >
+        <Text>Large</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ flex: 1, flexDirection: "row" }}
+        onPress={() => editScale("Medium")}
+      >
+        <Text>Medium</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={{ flex: 1, flexDirection: "row" }}
+        onPress={() => editScale("Small")}
+      >
+        <Text>Small</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "rgba(150,150,150,0.5)",
-    width: 300,
+    width: 200,
     alignItems: "center",
     position: "absolute",
     right: -100,

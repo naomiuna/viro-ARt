@@ -43,7 +43,13 @@ export default class ViroSample extends Component {
           />
         </TouchableOpacity>
         {showMenu && <ArtPicker updateChosenArt={this.updateChosenArt} />}
-        {editMenu && <EditArtMenu deleteMethod={this.deleteArt} />}
+        {editMenu && (
+          <EditArtMenu
+            deleteMethod={this.deleteArt}
+            closeEditMenu={this.closeEditMenu}
+            editScale={this.editScale}
+          />
+        )}
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={this.screenShot}
@@ -65,14 +71,46 @@ export default class ViroSample extends Component {
   };
 
   updateChosenArt = (newArt) => {
-    const joined = this.state.chosenArt.concat(newArt);
-    this.setState({ chosenArt: joined });
+    const { chosenArt } = this.state;
+    const found = chosenArt.find((element) => element.image_url === newArt);
+
+    if (!found) {
+      let artObj = { image_url: newArt, scale: [0.5, 0.5, 0.5] };
+      const joined = this.state.chosenArt.concat(artObj);
+      this.setState({ chosenArt: joined });
+    }
   };
   showEditMenu = (artPiece) => {
-    console.log(artPiece);
+    if (this.state.editMenu === false) {
+      this.setState((prevState) => {
+        return { showMenu: false, editMenu: true, currentArtPiece: artPiece };
+      });
+    }
+  };
 
-    this.setState((prevState) => {
-      return { showMenu: false, editMenu: true, currentArtPiece: artPiece };
+  editScale = (size) => {
+    const { chosenArt, currentArtPiece } = this.state;
+    let [...artCopy] = chosenArt;
+
+    const resizingScale = artCopy.map((art) => {
+      if (art.image_url === currentArtPiece) {
+        if (size === "Large") {
+          art.scale = [0.75, 0.75, 0];
+        }
+        if (size === "Medium") {
+          art.scale = [0.5, 0.5, 0];
+        }
+        if (size === "Small") {
+          art.scale = [0.25, 0.25, 0];
+        }
+        return art;
+      } else {
+        return art;
+      }
+    });
+
+    this.setState({ chosenArt: resizingScale }, () => {
+      console.log(this.state.chosenArt);
     });
   };
 
@@ -83,13 +121,13 @@ export default class ViroSample extends Component {
   deleteArt = () => {
     const { chosenArt, currentArtPiece } = this.state;
     const newArt = chosenArt.filter((art) => {
-      if (art !== currentArtPiece) return art;
+      if (art.image_url !== currentArtPiece) return art;
     });
-    this.setState({ chosenArt: newArt });
+    this.setState({ chosenArt: newArt, editMenu: false });
   };
   screenShot = () => {
     this.ARSceneNav.sceneNavigator.takeScreenshot("photo", true);
-    Alert.alert("Save to photo!");
+    Alert.alert("Save to your camera roll!");
   };
 }
 

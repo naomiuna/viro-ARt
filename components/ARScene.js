@@ -18,12 +18,10 @@ export default class ARScene extends Component {
   state = {
     text: "Initializing AR...",
     loading: true,
-    scale: [0.5, 0.5, 0.5],
     // chosenArt: 'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg'
   };
 
   render() {
-    console.log(this.props);
     const { text, loading } = this.state;
     const {
       sceneNavigator: {
@@ -37,8 +35,9 @@ export default class ARScene extends Component {
       >
         {chosenArt &&
           chosenArt.map((artPiece) => {
+            const { image_url, scale } = artPiece;
             let rightArt = "";
-            if (typeof artPiece === "string") rightArt = artPiece;
+            if (typeof image_url === "string") rightArt = image_url;
             return (
               <ViroNode
                 position={[0, 0, 0]}
@@ -49,7 +48,7 @@ export default class ARScene extends Component {
                   onClick={() => {
                     showEditMenu(rightArt);
                   }}
-                  scale={this.state.scale}
+                  scale={scale}
                   position={[0, 0, -2]}
                   source={{ uri: rightArt }}
                 />
@@ -69,22 +68,7 @@ export default class ARScene extends Component {
       // Handle loss of tracking
     }
   };
-  _onPinch = (pinchState, scaleFactor, source) => {
-    console.log(scaleFactor);
-    let newScale = [
-      this.state.scale[0] * scaleFactor,
-      this.state.scale[1] * scaleFactor,
-      this.state.scale[2] * (scaleFactor / 2),
-    ];
 
-    if (pinchState == 3) {
-      this.setState({
-        scale: newScale,
-      });
-
-      return;
-    }
-  };
   onClick = () => {};
 
   onSelect = () => {
