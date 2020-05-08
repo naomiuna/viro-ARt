@@ -71,6 +71,7 @@ const AppTab = createMaterialTopTabNavigator(
     swipeEnabled: true,
     tabBarPosition: 'bottom',
     lazy: true,
+    swipeEnabled: false,
     tabBarOptions: {
       labelStyle: {
         fontSize: 12,
