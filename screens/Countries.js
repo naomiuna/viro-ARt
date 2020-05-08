@@ -42,14 +42,7 @@ export default class Countries extends React.Component {
     const { apiLocations } = this.state;
     return (
       <View style={styles.container}>
-        <Text
-          style={{
-            padding: 16,
-            fontSize: 14,
-            color: 'white',
-            backgroundColor: '#53ab8b'
-          }}
-        >
+        <Text style={styles.header}>
           Choose a continent or country to browse art...
         </Text>
         <CountryList
@@ -64,5 +57,12 @@ export default class Countries extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  header: {
+    padding: 16,
+    fontSize: 14,
+    color: 'white',
+    backgroundColor: '#53ab8b',
+    textAlign: 'center'
   }
 });

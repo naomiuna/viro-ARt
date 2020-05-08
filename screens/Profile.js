@@ -26,16 +26,7 @@ export default class ProfileScreen extends Component {
     const { username, artData } = this.state;
     return (
       <View style={styles.container}>
-        <Text
-          style={{
-            padding: 16,
-            fontSize: 20,
-            color: 'white',
-            backgroundColor: '#53ab8b'
-          }}
-        >
-          {username}'s Gallery
-        </Text>
+        <Text style={styles.header}>{username}'s Gallery</Text>
         <ArtList
           art={artData}
           navigation={this.props.navigation}
@@ -59,12 +50,18 @@ export default class ProfileScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    paddingTop: 22
+    flex: 1
   },
   loading: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  header: {
+    padding: 16,
+    fontSize: 20,
+    color: 'white',
+    backgroundColor: '#53ab8b',
+    textAlign: 'center'
   }
 });

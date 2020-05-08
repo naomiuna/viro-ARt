@@ -79,9 +79,7 @@ const AppTab = createMaterialTopTabNavigator(
       style: {
         backgroundColor: 'white'
       },
-      indicatorStyle: {
-        color: '#53ab8b'
-      }
+      indicatorStyle: { backgroundColor: '#53ab8b' }
     }
   }
 );
