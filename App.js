@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   createStackNavigator,
   createSwitchNavigator,
-  createBottomTabNavigator
+  createMaterialTopTabNavigator
 } from 'react-navigation';
 import HomeScreen from './screens/Home';
 import AR from './screens/AR';
@@ -26,14 +26,17 @@ const AuthStack = createStackNavigator({
   SignUp: SignUp
 });
 
-const AppTab = createBottomTabNavigator(
+const AppTab = createMaterialTopTabNavigator(
   {
     Profile: ProfileScreen,
     Home: AppStack,
     AR: AR
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    swipeEnabled: true,
+    tabBarPosition: 'bottom',
+    lazy: true
   }
 );
 

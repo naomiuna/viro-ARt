@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as api from '../utils/apiAWS';
 import {
   View,
   StyleSheet,
@@ -6,32 +7,25 @@ import {
   Image,
   Alert,
   TouchableOpacity,
-  Text
+  Text,
 } from 'react-native';
 
 export default class ArtPicker extends Component {
   state = {
-    artData: [
-      {
-        primaryImage:
-          'https://images.metmuseum.org/CRDImages/ep/original/DT1567.jpg',
-        objectID: '436535'
-      },
-      {
-        primaryImage:
-          'https://images.metmuseum.org/CRDImages/ep/original/DP346474.jpg',
-        objectID: '436528'
-      },
-      {
-        primaryImage:
-          'https://images.metmuseum.org/CRDImages/ep/original/DT1502_cropped2.jpg',
-        objectID: '436532'
-      }
-    ],
-    isLoading: false
+    artData: [],
+    isLoading: true,
+    username: 'jessjelly',
   };
 
-  //component did mount - fetch users saved art - set loading to false
+  componentDidMount() {
+    api.getUserArt(this.state.username).then((userData) => {
+      const artArray = userData.Item.userArtArray;
+      const artData = artArray.map((art) => {
+        return { objectID: Date.now(), primaryImage: art };
+      });
+      this.setState({ artData, isLoading: false });
+    });
+  }
 
   render() {
     const { artData, isLoading } = this.state;
@@ -80,12 +74,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     position: 'absolute',
     right: -100,
-    height: '100%'
+    height: '100%',
   },
   artItem: {
     height: 175,
     alignItems: 'center',
     margin: 3,
-    borderRadius: 2
-  }
+    borderRadius: 2,
+  },
 });

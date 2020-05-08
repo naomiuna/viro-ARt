@@ -27,6 +27,7 @@ export default class ViroSample extends Component {
         <ViroARSceneNavigator
           initialScene={{ scene: ARScene }}
           viroAppProps={[{ chosenArt }, this.showEditMenu]}
+          ref={(ARSceneNav) => (this.ARSceneNav = ARSceneNav)}
         />
         <TouchableOpacity
           activeOpacity={0.7}
@@ -43,6 +44,16 @@ export default class ViroSample extends Component {
         </TouchableOpacity>
         {showMenu && <ArtPicker updateChosenArt={this.updateChosenArt} />}
         {editMenu && <EditArtMenu deleteMethod={this.deleteArt} />}
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={this.screenShot}
+          style={styles2.TouchableOpacityStyle}
+        >
+          <Image
+            source={require("../images/camera.jpg")}
+            style={styles.FloatingButtonStyle}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -74,8 +85,11 @@ export default class ViroSample extends Component {
     const newArt = chosenArt.filter((art) => {
       if (art !== currentArtPiece) return art;
     });
-
     this.setState({ chosenArt: newArt });
+  };
+  screenShot = () => {
+    this.ARSceneNav.sceneNavigator.takeScreenshot("photo", true);
+    Alert.alert("Save to photo!");
   };
 }
 
@@ -91,6 +105,27 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     left: 30,
     top: 30,
+  },
+
+  FloatingButtonStyle: {
+    resizeMode: "contain",
+    width: 50,
+    height: 50,
+  },
+});
+
+const styles2 = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  TouchableOpacityStyle: {
+    position: "absolute",
+    width: 50,
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    left: 30,
+    top: 100,
   },
 
   FloatingButtonStyle: {
