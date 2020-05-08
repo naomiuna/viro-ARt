@@ -47,7 +47,7 @@ export default class Countries extends React.Component {
             padding: 16,
             fontSize: 14,
             color: 'white',
-            backgroundColor: '#fb5b5a'
+            backgroundColor: '#53ab8b'
           }}
         >
           Choose a continent or country to browse art...
