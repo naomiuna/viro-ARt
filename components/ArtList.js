@@ -77,7 +77,7 @@ class ArtList extends Component {
     return (
       <View style={{ flex: 1, flexDirection: 'column', margin: 2 }}>
         <TouchableOpacity
-          style={{ flex: 1 }}
+          style={{ flex: 1 / 3, aspectRatio: 1 }}
           onPress={() => {
             if (this.props.type === 'country') {
               this.props.navigation.navigate('ArtCard', {
@@ -98,7 +98,8 @@ class ArtList extends Component {
 const styles = StyleSheet.create({
   image: {
     width: '100%',
-    height: 120
+    height: 120,
+    flex: 1
   },
   fullImageStyle: {
     justifyContent: 'center',
