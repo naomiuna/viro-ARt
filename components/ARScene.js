@@ -40,16 +40,21 @@ export default class ARScene extends Component {
             if (typeof image_url === "string") rightArt = image_url;
             return (
               <ViroNode
-                position={[0, 0, 0]}
-                dragType="FixedToWorld"
+                position={[0, 0, -2]}
                 onDrag={() => {}}
+                dragType="FixedToPlane"
+                dragPlane={{
+                  planePoint: [0, 0, -2],
+                  planeNormal: [0, 0, 1], // works if user standing perpendicular to wall.
+                  maxDistance: 5,
+                }}
               >
                 <ViroImage
                   onClick={() => {
                     showEditMenu(rightArt);
                   }}
                   scale={scale}
-                  position={[0, 0, -2]}
+                  position={[0, 0, 0]}
                   source={{ uri: rightArt }}
                 />
               </ViroNode>
@@ -68,8 +73,6 @@ export default class ARScene extends Component {
       // Handle loss of tracking
     }
   };
-
-  onClick = () => {};
 
   onSelect = () => {
     return (
