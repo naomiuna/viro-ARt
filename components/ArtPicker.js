@@ -5,9 +5,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  Alert,
-  TouchableOpacity,
-  Text,
+  TouchableOpacity
 } from 'react-native';
 
 export default class ArtPicker extends Component {
@@ -15,16 +13,11 @@ export default class ArtPicker extends Component {
     artData: [],
     isLoading: true,
     username: 'jessjelly',
+    refreshing: false
   };
 
   componentDidMount() {
-    api.getUserArt(this.state.username).then((userData) => {
-      const artArray = userData.Item.userArtArray;
-      const artData = artArray.map((art) => {
-        return { objectID: Date.now(), primaryImage: art };
-      });
-      this.setState({ artData, isLoading: false });
-    });
+    this.fetchArt();
   }
 
   render() {
@@ -33,7 +26,7 @@ export default class ArtPicker extends Component {
     return (
       <View style={styles.container}>
         {isLoading ? (
-          <Text>Fetching your favourite art</Text>
+          <Image source={require('../images/Earth-5.9s-204px.gif')} />
         ) : (
           <FlatList
             numColumns={1}
@@ -45,11 +38,26 @@ export default class ArtPicker extends Component {
               />
             )}
             keyExtractor={(item) => item.objectID}
+            refreshing={this.state.refreshing}
+            onRefresh={() => {
+              this.fetchArt();
+            }}
           ></FlatList>
         )}
       </View>
     );
   }
+
+  fetchArt = () => {
+    this.setState({ artData: [], isLoading: true });
+    api.getUserArt(this.state.username).then((userData) => {
+      const artArray = userData.Item.userArtArray;
+      const artData = artArray.map((art) => {
+        return { objectID: Date.now(), primaryImage: art };
+      });
+      this.setState({ artData, isLoading: false });
+    });
+  };
 }
 
 function ArtItem({ primaryImage, updateChosenArt }) {
@@ -69,17 +77,18 @@ function ArtItem({ primaryImage, updateChosenArt }) {
 }
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'rgba(150,150,150,0.5)',
-    width: 300,
+    backgroundColor: '#eafff980',
+    width: 200,
     alignItems: 'center',
+    justifyContent: 'center',
     position: 'absolute',
-    right: -100,
-    height: '100%',
+    right: 0,
+    height: '100%'
   },
   artItem: {
     height: 175,
     alignItems: 'center',
     margin: 3,
-    borderRadius: 2,
-  },
+    borderRadius: 2
+  }
 });

@@ -14,17 +14,51 @@ import SignUp from './screens/SignUp';
 import ArtCard from './screens/ArtCard';
 import ProfileScreen from './screens/Profile';
 
-const AppStack = createStackNavigator({
-  Countries: Countries,
-  Country: Country,
-  ArtCard: ArtCard
-});
+const AppStack = createStackNavigator(
+  {
+    Countries: Countries,
+    Country: Country,
+    ArtCard: ArtCard
+  },
+  {
+    navigationOptions: {
+      headerTitle: 'world of ARt',
+      headerStyle: {
+        backgroundColor: '#fff'
+      },
+      headerBackTitle: null,
+      headerTintColor: '#157759',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: '#157759'
+      },
+      headerLayoutPreset: 'center'
+    }
+  }
+);
 
-const AuthStack = createStackNavigator({
-  Login: Login,
-  SignIn: SignIn,
-  SignUp: SignUp
-});
+const AuthStack = createStackNavigator(
+  {
+    Login: Login,
+    SignIn: SignIn,
+    SignUp: SignUp
+  },
+  {
+    navigationOptions: {
+      headerTitle: 'world of ARt',
+      headerStyle: {
+        backgroundColor: '#fff'
+      },
+      headerBackTitle: null,
+      headerTintColor: '#157759',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: '#157759'
+      },
+      headerLayoutPreset: 'center'
+    }
+  }
+);
 
 const AppTab = createMaterialTopTabNavigator(
   {
@@ -36,7 +70,18 @@ const AppTab = createMaterialTopTabNavigator(
     initialRouteName: 'Home',
     swipeEnabled: true,
     tabBarPosition: 'bottom',
-    lazy: true
+    lazy: true,
+    swipeEnabled: false,
+    tabBarOptions: {
+      labelStyle: {
+        fontSize: 12,
+        color: '#157759'
+      },
+      style: {
+        backgroundColor: 'white'
+      },
+      indicatorStyle: { backgroundColor: '#53ab8b' }
+    }
   }
 );
 

@@ -26,11 +26,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: 'white'
   },
   btn: {
     width: '80%',
-    backgroundColor: '#fb5b5a',
+    backgroundColor: '#53ab8b',
     borderRadius: 25,
     height: 50,
     alignItems: 'center',
