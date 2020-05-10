@@ -37,7 +37,7 @@ export default class ArtPicker extends Component {
                 primaryImage={item.primaryImage}
               />
             )}
-            keyExtractor={(item) => item.objectID}
+            keyExtractor={this.keyExtractor}
             refreshing={this.state.refreshing}
             onRefresh={() => {
               this.fetchArt();
@@ -47,6 +47,10 @@ export default class ArtPicker extends Component {
       </View>
     );
   }
+
+  keyExtractor = (item) => {
+    return item.objectID + (Math.random() * 100).toString();
+  };
 
   fetchArt = () => {
     this.setState({ artData: [], isLoading: true });
