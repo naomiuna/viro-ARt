@@ -7,6 +7,7 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
+  RefreshControl,
 } from "react-native";
 import ArtList from "../components/ArtList";
 import * as api from "../utils/apiAWS";
@@ -17,6 +18,7 @@ export default class ProfileScreen extends Component {
     artData: [],
     isLoading: true,
     activeIndex: 0,
+    refreshing: false,
   };
 
   componentDidMount() {
@@ -32,10 +34,18 @@ export default class ProfileScreen extends Component {
           <Image source={require("../images/Earth-5.9s-204px.gif")} />
         </View>
       );
-    const { username } = this.state;
+    const { username, artData, activeIndex } = this.state;
     return (
       <SafeAreaView style={styles.container}>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh}
+            />
+          }
+        >
           <View style={{ alignSelf: "center" }}>
             <View style={styles.profileImage}>
               <Image
@@ -62,41 +72,40 @@ export default class ProfileScreen extends Component {
             >
               <Button
                 transparent
+                color="green"
                 title="Gallery"
                 onPress={() => this.galleryClicked(0)}
-                active={this.state.activeIndex === 0}
-                style={[this.state.activeIndex === 0 ? {} : { color: "grey" }]}
               ></Button>
 
               <Button
                 transparent
+                color="green"
                 title="Screenshot"
                 onPress={() => this.galleryClicked(1)}
-                active={this.state.activeIndex === 1}
-                style={[this.state.activeIndex === 1 ? {} : { color: "grey" }]}
               ></Button>
             </View>
-            {this.renderSection()}
+            {activeIndex === 0 ? (
+              <ArtList
+                art={artData}
+                navigation={this.props.navigation}
+                type="profile"
+                fetchArt={this.fetchArt}
+              />
+            ) : (
+              activeIndex === 1 && (
+                <View>
+                  <Text>Screenshot section goes </Text>
+                </View>
+              )
+            )}
           </View>
         </ScrollView>
       </SafeAreaView>
     );
   }
-  renderSection = () => {
-    const { activeIndex, artData } = this.state;
 
-    if (activeIndex === 0) {
-      return (
-        <View>
-          <ArtList
-            art={artData}
-            navigation={this.props.navigation}
-            type="profile"
-            fetchArt={this.fetchArt}
-          />
-        </View>
-      );
-    }
+  galleryClicked = (index) => {
+    this.setState({ activeIndex: index });
   };
 
   fetchArt = () => {
@@ -106,12 +115,13 @@ export default class ProfileScreen extends Component {
       const artData = artArray.map((art) => {
         return { objectID: Date.now(), primaryImage: art };
       });
-      this.setState({ artData, isLoading: false });
+      this.setState({ artData, isLoading: false, refreshing: false });
     });
   };
 
-  galleryClicked = (index) => {
-    this.setState({ activeIndex: index });
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.fetchArt();
   };
 }
 
@@ -127,14 +137,14 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    width: undefined,
-    height: undefined,
+    aspectRatio: 1.0,
+    resizeMode: "contain",
   },
 
   profileImage: {
     width: 200,
     height: 200,
-    borderRadius: 75,
+    borderRadius: 25,
     overflow: "hidden",
     alignSelf: "center",
   },
