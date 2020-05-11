@@ -20,58 +20,21 @@ class ArtCard extends Component {
 
         <View style={styles.info}>
           <Text style={styles.info_key}>ARTIST: </Text>
-          <Text
-            style={{
-              paddingBottom: 12,
-              fontSize: 16,
-              fontWeight: '500',
-              color: 'white',
-            }}
-          >
+          <Text style={styles.info_text}>
             {artObject.artistDisplayName ? artObject.artistDisplayName : 'N/A'}
           </Text>
           <Text style={styles.info_key}>DATE: </Text>
-          <Text
-            style={{
-              paddingBottom: 16,
-              fontSize: 16,
-              fontWeight: '500',
-              color: 'white',
-            }}
-          >
+          <Text style={styles.info_text}>
             {artObject.objectDate ? artObject.objectDate : 'N/A'}
           </Text>
           <Text style={styles.info_key}>ARTIST BIO: </Text>
-          <Text
-            style={{
-              paddingBottom: 16,
-              fontSize: 16,
-              fontWeight: '500',
-              color: 'white',
-            }}
-          >
+          <Text style={styles.info_text}>
             {artObject.artistDisplayBio ? artObject.artistDisplayBio : 'N/A'}
           </Text>
           <Text style={styles.info_key}>ART LOCATION: </Text>
-          <Text
-            style={{
-              paddingBottom: 16,
-              fontSize: 16,
-              fontWeight: '500',
-              color: 'white',
-            }}
-          >
-            {artObject.repository}
-          </Text>
+          <Text style={styles.info_text}>{artObject.repository}</Text>
           <Text style={styles.info_key}>TO FIND OUT MORE: </Text>
-          <Text
-            style={{
-              paddingBottom: 16,
-              fontSize: 16,
-              fontWeight: '500',
-              color: 'white',
-            }}
-          >
+          <Text style={styles.info_text}>
             {artObject.objectWikidata_URL
               ? artObject.objectWikidata_URL
               : 'N/A'}
@@ -149,6 +112,12 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#13ab8b',
     borderRadius: 10,
+  },
+  info_text: {
+    paddingBottom: 16,
+    fontSize: 16,
+    fontWeight: '500',
+    color: 'white',
   },
 });
 
