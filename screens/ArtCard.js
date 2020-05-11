@@ -15,15 +15,7 @@ class ArtCard extends Component {
     const { artObject } = this.state;
     return (
       <View style={styles.container}>
-        <Image
-          style={{
-            width: 150,
-            height: 200,
-            alignSelf: 'center',
-            marginTop: 20,
-          }}
-          source={{ uri: artObject.primaryImage }}
-        />
+        <Image style={styles.image} source={{ uri: artObject.primaryImage }} />
         <Text style={styles.title}>{artObject.title}</Text>
 
         <View style={styles.info}>
@@ -33,31 +25,60 @@ class ArtCard extends Component {
               paddingBottom: 12,
               fontSize: 16,
               fontWeight: '500',
+              color: 'white',
             }}
           >
             {artObject.artistDisplayName ? artObject.artistDisplayName : 'N/A'}
           </Text>
           <Text style={styles.info_key}>DATE: </Text>
-          <Text style={{ paddingBottom: 16, fontSize: 16, fontWeight: '500' }}>
+          <Text
+            style={{
+              paddingBottom: 16,
+              fontSize: 16,
+              fontWeight: '500',
+              color: 'white',
+            }}
+          >
             {artObject.objectDate ? artObject.objectDate : 'N/A'}
           </Text>
           <Text style={styles.info_key}>ARTIST BIO: </Text>
-          <Text style={{ paddingBottom: 16, fontSize: 16, fontWeight: '500' }}>
+          <Text
+            style={{
+              paddingBottom: 16,
+              fontSize: 16,
+              fontWeight: '500',
+              color: 'white',
+            }}
+          >
             {artObject.artistDisplayBio ? artObject.artistDisplayBio : 'N/A'}
           </Text>
           <Text style={styles.info_key}>ART LOCATION: </Text>
-          <Text style={{ paddingBottom: 16, fontSize: 16, fontWeight: '500' }}>
+          <Text
+            style={{
+              paddingBottom: 16,
+              fontSize: 16,
+              fontWeight: '500',
+              color: 'white',
+            }}
+          >
             {artObject.repository}
           </Text>
           <Text style={styles.info_key}>TO FIND OUT MORE: </Text>
-          <Text style={{ paddingBottom: 16, fontSize: 16, fontWeight: '500' }}>
+          <Text
+            style={{
+              paddingBottom: 16,
+              fontSize: 16,
+              fontWeight: '500',
+              color: 'white',
+            }}
+          >
             {artObject.objectWikidata_URL
               ? artObject.objectWikidata_URL
               : 'N/A'}
           </Text>
         </View>
         <TouchableOpacity onPress={this.addArt} style={styles.save_btn}>
-          <Text style={{ fontSize: 20, fontWeight: '700' }}>
+          <Text style={{ fontSize: 20, fontWeight: '700', color: 'white' }}>
             SAVE TO GALLERY
           </Text>
         </TouchableOpacity>
@@ -81,7 +102,6 @@ class ArtCard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFF',
     justifyContent: 'center',
   },
   title: {
@@ -90,7 +110,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     margin: 10,
     paddingTop: 15,
-    fontStyle: 'italic',
   },
   info: {
     alignSelf: 'center',
@@ -100,11 +119,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#53ab8b',
     alignSelf: 'center',
     borderRadius: 25,
+    borderWidth: 2,
+    borderColor: '#13ab8b',
   },
   info_key: {
     fontWeight: '700',
-    paddingBottom: 3,
+    paddingBottom: 4,
     fontStyle: 'italic',
+    color: 'white',
   },
   save_btn: {
     backgroundColor: '#53ab8b',
@@ -116,6 +138,17 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 10,
     alignSelf: 'center',
+    borderWidth: 2,
+    borderColor: '#13ab8b',
+  },
+  image: {
+    width: 150,
+    height: 200,
+    alignSelf: 'center',
+    marginTop: 20,
+    borderWidth: 2,
+    borderColor: '#13ab8b',
+    borderRadius: 10,
   },
 });
 
