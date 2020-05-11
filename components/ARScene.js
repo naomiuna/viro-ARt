@@ -2,9 +2,7 @@
 
 import React, { Component } from 'react';
 
-import { StyleSheet } from 'react-native';
-
-import { ViroARScene, ViroConstants, ViroImage, ViroNode } from 'react-viro';
+import { ViroARScene, ViroImage, ViroNode } from 'react-viro';
 
 export default class ARScene extends Component {
   state = {};
@@ -26,6 +24,7 @@ export default class ARScene extends Component {
               <ViroNode
                 position={[0, 0, -2]}
                 onDrag={() => {}}
+                key={rightArt}
                 dragType="FixedToPlane"
                 dragPlane={{
                   planePoint: [0, 0, -2],
