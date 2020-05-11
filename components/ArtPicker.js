@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
+  Text
 } from 'react-native';
 
 export default class ArtPicker extends Component {
@@ -28,25 +29,32 @@ export default class ArtPicker extends Component {
         {isLoading ? (
           <Image source={require('../images/Earth-5.9s-204px.gif')} />
         ) : (
-          <FlatList
-            numColumns={1}
-            data={artData}
-            renderItem={({ item }) => (
-              <ArtItem
-                updateChosenArt={updateChosenArt}
-                primaryImage={item.primaryImage}
-              />
-            )}
-            keyExtractor={(item) => item.objectID}
-            refreshing={this.state.refreshing}
-            onRefresh={() => {
-              this.fetchArt();
-            }}
-          ></FlatList>
+          <>
+            <Text style={styles.header}>Choose art to add to your wall</Text>
+            <FlatList
+              numColumns={1}
+              data={artData}
+              renderItem={({ item }) => (
+                <ArtItem
+                  updateChosenArt={updateChosenArt}
+                  primaryImage={item.primaryImage}
+                />
+              )}
+              keyExtractor={this.keyExtractor}
+              refreshing={this.state.refreshing}
+              onRefresh={() => {
+                this.fetchArt();
+              }}
+            ></FlatList>
+          </>
         )}
       </View>
     );
   }
+
+  keyExtractor = (item) => {
+    return item.objectID + (Math.random() * 100).toString();
+  };
 
   fetchArt = () => {
     this.setState({ artData: [], isLoading: true });
@@ -64,12 +72,12 @@ function ArtItem({ primaryImage, updateChosenArt }) {
   return (
     <View style={styles.artItem}>
       <TouchableOpacity
-        style={{ flex: 1, flexDirection: 'row' }}
+        style={styles.artItem}
         onPress={() => updateChosenArt(primaryImage)}
       >
         <Image
           source={{ uri: primaryImage }}
-          style={{ width: 130, height: 200 }}
+          style={{ width: 130, height: 150 }}
         />
       </TouchableOpacity>
     </View>
@@ -78,7 +86,7 @@ function ArtItem({ primaryImage, updateChosenArt }) {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#eafff980',
-    width: 200,
+    width: 150,
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
@@ -86,9 +94,19 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   artItem: {
-    height: 175,
-    alignItems: 'center',
-    margin: 3,
-    borderRadius: 2
+    // height: 175,
+    // alignItems: 'center',
+    // margin: 3,
+    // borderRadius: 2
+    flex: 1,
+    margin: 1
+    // flexDirection: row
+  },
+  header: {
+    fontSize: 14,
+    color: 'white',
+    backgroundColor: '#53ab8b',
+    textAlign: 'center',
+    width: '100%'
   }
 });

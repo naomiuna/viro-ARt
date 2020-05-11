@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 export default class LogIn extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Image
+          style={{ width: '100%', height: 200 }}
+          source={require('../images/world-map.png')}
+        />
         <TouchableOpacity
           onPress={() => this.props.navigation.navigate('SignIn')}
           style={styles.btn}
