@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { Text, Image, View, StyleSheet, TouchableOpacity } from 'react-native';
+import {
+  Text,
+  Image,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import * as api from '../utils/apiAWS.js';
 
 class ArtCard extends Component {
@@ -14,7 +21,7 @@ class ArtCard extends Component {
   render() {
     const { artObject } = this.state;
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Image style={styles.image} source={{ uri: artObject.primaryImage }} />
         <Text style={styles.title}>{artObject.title}</Text>
 
@@ -45,7 +52,7 @@ class ArtCard extends Component {
             SAVE TO GALLERY
           </Text>
         </TouchableOpacity>
-      </View>
+      </ScrollView>
     );
   }
 
@@ -65,7 +72,6 @@ class ArtCard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
   },
   title: {
     alignSelf: 'center',
