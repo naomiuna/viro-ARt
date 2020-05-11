@@ -165,25 +165,4 @@ const styles = StyleSheet.create({
   }
 });
 
-// const styles2 = StyleSheet.create({
-//   container: {
-//     flex: 1
-//   },
-//   TouchableOpacityStyle: {
-//     position: 'absolute',
-//     width: 50,
-//     height: 50,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     left: 30,
-//     top: 100
-//   },
-
-//   FloatingButtonStyle: {
-//     resizeMode: 'contain',
-//     width: 50,
-//     height: 50
-//   }
-// });
-
 module.exports = ViroSample;

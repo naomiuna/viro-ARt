@@ -48,46 +48,6 @@ export default class EditArtMenu extends Component {
       </View>
     );
   }
-
-  // function Button({ primaryImage, deleteArt }) {
-  //   return (
-  //     <View style={styles.artItem}>
-  //       <TouchableOpacity
-  //         style={{ flex: 1, flexDirection: "row" }}
-  //         onPress={() => deleteArt()}
-  //       >
-  //         <Image
-  //           source={{ uri: primaryImage }}
-  //           style={{ width: 130, height: 200 }}
-  //         />
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
-  // }
-
-  // function EditScale({ editScale }) {
-  //   return (
-  //     <View>
-  //       <TouchableOpacity
-  //         style={{ flex: 1, flexDirection: "row" }}
-  //         onPress={() => editScale("Large")}
-  //       >
-  //         <Text>Large</Text>
-  //       </TouchableOpacity>
-  //       <TouchableOpacity
-  //         style={{ flex: 1, flexDirection: "row" }}
-  //         onPress={() => editScale("Medium")}
-  //       >
-  //         <Text>Medium</Text>
-  //       </TouchableOpacity>
-  //       <TouchableOpacity
-  //         style={{ flex: 1, flexDirection: "row" }}
-  //         onPress={() => editScale("Small")}
-  //       >
-  //         <Text>Small</Text>
-  //       </TouchableOpacity>
-  //     </View>
-  //   );
 }
 
 const styles = StyleSheet.create({
