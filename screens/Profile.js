@@ -11,11 +11,14 @@ import {
 } from "react-native";
 import ArtList from "../components/ArtList";
 import * as api from "../utils/apiAWS";
+import * as apiS3 from "../utils/s3Requests";
+import ScreenShotList from "../components/ScreenShotlist";
 
 export default class ProfileScreen extends Component {
   state = {
     username: "jessjelly",
     artData: [],
+    screenShotData: [],
     isLoading: true,
     activeIndex: 0,
     refreshing: false,
@@ -23,6 +26,7 @@ export default class ProfileScreen extends Component {
 
   componentDidMount() {
     this.fetchArt();
+    this.fetchScreenShot();
   }
 
   //componentDidMount  - get username of authenticated user & get  their favourite art
@@ -93,9 +97,7 @@ export default class ProfileScreen extends Component {
               />
             ) : (
               activeIndex === 1 && (
-                <View>
-                  <Text>Screenshot section goes </Text>
-                </View>
+                <ScreenShotList ScreenShot={this.state.screenShotData} />
               )
             )}
           </View>
@@ -106,6 +108,19 @@ export default class ProfileScreen extends Component {
 
   galleryClicked = (index) => {
     this.setState({ activeIndex: index });
+  };
+
+  fetchScreenShot = () => {
+    for (let i = 1; i <= 6; i++) {
+      let count = 1;
+      apiS3.getScreenShots(i).then((url) => {
+        const screenShotObj = { count, url };
+        this.setState({
+          screenShotData: [...this.state.screenShotData, screenShotObj],
+        });
+      });
+      count++;
+    }
   };
 
   fetchArt = () => {
@@ -154,33 +169,3 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
 });
-
-{
-  /* <View style={styles.container}>
-        <Text style={styles.header}>{username}'s Gallery</Text>
-        <ArtList
-          art={artData}
-          navigation={this.props.navigation}
-          type="profile"
-          fetchArt={this.fetchArt}
-        />
-      </View> */
-}
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   loading: {
-//     flex: 1,
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   header: {
-//     padding: 16,
-//     fontSize: 20,
-//     color: "white",
-//     backgroundColor: "#53ab8b",
-//     textAlign: "center",
-//   },
-// });

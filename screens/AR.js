@@ -8,6 +8,8 @@ import {
   Image,
 } from "react-native";
 
+import options from "../config";
+import { RNS3 } from "react-native-s3-upload";
 import { ViroARSceneNavigator } from "react-viro";
 import ARScene from "../components/ARScene";
 import ArtPicker from "../components/ArtPicker";
@@ -126,9 +128,26 @@ export default class ViroSample extends Component {
     this.setState({ chosenArt: newArt, editMenu: false });
   };
   screenShot = () => {
-    this.ARSceneNav.sceneNavigator.takeScreenshot("photo", true);
-    Alert.alert("Save to your camera roll!");
+    this.ARSceneNav.sceneNavigator
+      .takeScreenshot("photo", true)
+      .then((response) => {
+        this.uploadToS3(response.url);
+      });
+    Alert.alert("Saved to your camera roll!");
   };
+  uploadToS3(url) {
+    const file = {
+      uri: url,
+      name: "6.png",
+      type: "image/png",
+    };
+
+    RNS3.put(file, options).then((response) => {
+      if (response.status !== 201)
+        throw new Error("Failed to upload image to S3");
+      console.log(response.body);
+    });
+  }
 }
 
 const styles = StyleSheet.create({
