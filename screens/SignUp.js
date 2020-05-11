@@ -29,7 +29,7 @@ export default class SignUp extends Component {
     } else {
       //aws authorisation - SignUp - then if successful...
       //(catch - alert with error message)
-      this.props.navigation.navigate('App');
+      this.props.navigation.navigate('Countries', { firstTime: true });
     }
   };
 

@@ -25,7 +25,7 @@ class ArtList extends Component {
             this.showModalFunction(false, '');
           }}
         >
-          <View style={styles.modelStyle}>
+          <View style={styles.modalStyle}>
             <Image
               style={styles.fullImageStyle}
               source={{ uri: this.state.modalImgURI }}
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     width: '98%',
     resizeMode: 'contain'
   },
-  modelStyle: {
+  modalStyle: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
