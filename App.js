@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {
   createStackNavigator,
   createSwitchNavigator,
-  createMaterialTopTabNavigator
+  createMaterialTopTabNavigator,
 } from 'react-navigation';
 import AR from './screens/AR';
 import Countries from './screens/Countries';
@@ -17,22 +17,23 @@ const AppStack = createStackNavigator(
   {
     Countries: Countries,
     Country: Country,
-    ArtCard: ArtCard
+    ArtCard: ArtCard,
   },
   {
     navigationOptions: {
-      headerTitle: 'world of ARt',
+      headerTitle: 'worldARt',
       headerStyle: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
       },
       headerBackTitle: null,
       headerTintColor: '#157759',
       headerTitleStyle: {
         fontWeight: 'bold',
-        color: '#157759'
+        color: '#157759',
+        fontSize: 40,
       },
-      headerLayoutPreset: 'center'
-    }
+      headerLayoutPreset: 'center',
+    },
   }
 );
 
@@ -40,22 +41,23 @@ const AuthStack = createStackNavigator(
   {
     Login: Login,
     SignIn: SignIn,
-    SignUp: SignUp
+    SignUp: SignUp,
   },
   {
     navigationOptions: {
-      headerTitle: 'world of ARt',
+      headerTitle: 'worldARt',
       headerStyle: {
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
       },
       headerBackTitle: null,
       headerTintColor: '#157759',
       headerTitleStyle: {
         fontWeight: 'bold',
-        color: '#157759'
+        color: '#157759',
+        fontSize: 40,
       },
-      headerLayoutPreset: 'center'
-    }
+      headerLayoutPreset: 'center',
+    },
   }
 );
 
@@ -63,7 +65,7 @@ const AppTab = createMaterialTopTabNavigator(
   {
     Profile: ProfileScreen,
     Home: AppStack,
-    AR: AR
+    AR: AR,
   },
   {
     initialRouteName: 'Home',
@@ -74,19 +76,19 @@ const AppTab = createMaterialTopTabNavigator(
     tabBarOptions: {
       labelStyle: {
         fontSize: 12,
-        color: '#157759'
+        color: '#157759',
       },
       style: {
-        backgroundColor: 'white'
+        backgroundColor: 'white',
       },
-      indicatorStyle: { backgroundColor: '#53ab8b' }
-    }
+      indicatorStyle: { backgroundColor: '#53ab8b' },
+    },
   }
 );
 
 const SwitchNav = createSwitchNavigator({
   Auth: AuthStack,
-  App: AppTab
+  App: AppTab,
 });
 
 export default class App extends Component {
