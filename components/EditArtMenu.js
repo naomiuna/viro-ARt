@@ -1,112 +1,148 @@
-import React, { Component } from "react";
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Image,
-  Alert,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import React, { Component } from 'react';
+import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
 
 export default class EditArtMenu extends Component {
-  state = {
-    isLoading: false,
-    Data: [
-      {
-        primaryImage:
-          "https://w7.pngwing.com/pngs/41/41/png-transparent-red-x-button-icon-error-http-404-icon-red-cross-mark-file-miscellaneous-trademark-heart.png",
-        objectID: "436535",
-      },
-    ],
-  };
+  state = {};
   render() {
-    const { Data, isLoading } = this.state;
     const { deleteMethod, closeEditMenu, editScale } = this.props;
     return (
       <View style={styles.container}>
-        {isLoading ? (
-          <Text>Fetching your favourite art</Text>
-        ) : (
-          <FlatList
-            numColumns={1}
-            data={Data}
-            renderItem={({ item }) => [
-              <Button
-                primaryImage={item.primaryImage}
-                deleteArt={deleteMethod}
-              />,
-              <CloseMenu closeEditMenu={closeEditMenu} />,
-              <EditScale editScale={editScale} />,
-            ]}
-            keyExtractor={(item) => item.objectID}
-          ></FlatList>
-        )}
+        <TouchableOpacity
+          activeOpacity={0.5}
+          style={styles.closeButtonStyle}
+          onPress={closeEditMenu}
+        >
+          <Image
+            source={{
+              uri:
+                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/close.png'
+            }}
+            style={{ width: 35, height: 35, marginTop: 1 }}
+          />
+        </TouchableOpacity>
+
+        <View style={styles.buttonContainer}>
+          <Text style={styles.headerText}>Update art size</Text>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => editScale('Large')}
+          >
+            <Text style={styles.btnText}>Large</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => editScale('Medium')}
+          >
+            <Text style={styles.btnText}>Medium</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => editScale('Small')}
+          >
+            <Text style={styles.btnText}>Small</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={deleteMethod} style={styles.deleteBtn}>
+            <Text style={styles.deleteBtnTxt}>DELETE ART</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
-}
 
-function Button({ primaryImage, deleteArt }) {
-  return (
-    <View style={styles.artItem}>
-      <TouchableOpacity
-        style={{ flex: 1, flexDirection: "row" }}
-        onPress={() => deleteArt()}
-      >
-        <Image
-          source={{ uri: primaryImage }}
-          style={{ width: 130, height: 200 }}
-        />
-      </TouchableOpacity>
-    </View>
-  );
-}
-function CloseMenu({ closeEditMenu }) {
-  return (
-    <View style={styles.artItem}>
-      <TouchableOpacity
-        style={{ flex: 1, flexDirection: "row" }}
-        onPress={() => closeEditMenu()}
-      >
-        <Text>Close Menu</Text>
-      </TouchableOpacity>
-    </View>
-  );
-}
+  // function Button({ primaryImage, deleteArt }) {
+  //   return (
+  //     <View style={styles.artItem}>
+  //       <TouchableOpacity
+  //         style={{ flex: 1, flexDirection: "row" }}
+  //         onPress={() => deleteArt()}
+  //       >
+  //         <Image
+  //           source={{ uri: primaryImage }}
+  //           style={{ width: 130, height: 200 }}
+  //         />
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
+  // }
 
-function EditScale({ editScale }) {
-  return (
-    <View>
-      <TouchableOpacity
-        style={{ flex: 1, flexDirection: "row" }}
-        onPress={() => editScale("Large")}
-      >
-        <Text>Large</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ flex: 1, flexDirection: "row" }}
-        onPress={() => editScale("Medium")}
-      >
-        <Text>Medium</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{ flex: 1, flexDirection: "row" }}
-        onPress={() => editScale("Small")}
-      >
-        <Text>Small</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  // function EditScale({ editScale }) {
+  //   return (
+  //     <View>
+  //       <TouchableOpacity
+  //         style={{ flex: 1, flexDirection: "row" }}
+  //         onPress={() => editScale("Large")}
+  //       >
+  //         <Text>Large</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity
+  //         style={{ flex: 1, flexDirection: "row" }}
+  //         onPress={() => editScale("Medium")}
+  //       >
+  //         <Text>Medium</Text>
+  //       </TouchableOpacity>
+  //       <TouchableOpacity
+  //         style={{ flex: 1, flexDirection: "row" }}
+  //         onPress={() => editScale("Small")}
+  //       >
+  //         <Text>Small</Text>
+  //       </TouchableOpacity>
+  //     </View>
+  //   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "rgba(150,150,150,0.5)",
-    width: 200,
-    alignItems: "center",
-    position: "absolute",
-    right: -100,
-    height: "100%",
+    backgroundColor: '#eafff980',
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: 0,
+    height: '100%'
   },
+  closeButtonStyle: {
+    width: 25,
+    height: 25,
+    top: 5,
+    right: 9,
+    position: 'absolute'
+  },
+  buttonContainer: {
+    height: '60%',
+    width: '100%',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    top: 20
+  },
+  deleteBtn: {
+    width: '80%',
+    backgroundColor: 'white',
+    borderRadius: 25,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 15
+  },
+  deleteBtnTxt: {
+    color: '#157759'
+  },
+  btn: {
+    width: '80%',
+    backgroundColor: '#53ab8b',
+    borderRadius: 20,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 5,
+    marginBottom: 5
+  },
+  btnText: {
+    color: 'white'
+  },
+  headerText: {
+    color: '#157759',
+    fontWeight: 'bold'
+  }
 });

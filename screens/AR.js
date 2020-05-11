@@ -32,14 +32,21 @@ export default class ViroSample extends Component {
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={this.toggleMenu}
-          style={styles.TouchableOpacityStyle}
+          style={styles.TouchableOpacityMenu}
         >
           <Image
-            source={{
-              uri:
-                'https://raw.githubusercontent.com/AboutReact/sampleresource/master/plus_icon.png'
-            }}
-            style={styles.FloatingButtonStyle}
+            source={require('../images/icons8-gallery-64.png')}
+            style={styles.FloatingMenuButtonStyle}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          activeOpacity={0.7}
+          onPress={this.screenShot}
+          style={styles.TouchableOpacityCamera}
+        >
+          <Image
+            source={require('../images/icons8-camera-100.png')}
+            style={styles.FloatingCameraButtonStyle}
           />
         </TouchableOpacity>
         {showMenu && <ArtPicker updateChosenArt={this.updateChosenArt} />}
@@ -50,16 +57,6 @@ export default class ViroSample extends Component {
             editScale={this.editScale}
           />
         )}
-        <TouchableOpacity
-          activeOpacity={0.7}
-          onPress={this.screenShot}
-          style={styles2.TouchableOpacityStyle}
-        >
-          <Image
-            source={require('../images/camera.jpg')}
-            style={styles.FloatingButtonStyle}
-          />
-        </TouchableOpacity>
       </View>
     );
   }
@@ -135,42 +132,58 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
-  TouchableOpacityStyle: {
+  TouchableOpacityMenu: {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    left: 30,
+    bottom: 100
+  },
+
+  FloatingMenuButtonStyle: {
+    resizeMode: 'contain',
+    width: 60,
+    height: 60
+  },
+  FloatingCameraButtonStyle: {
+    resizeMode: 'contain',
+    width: 60,
+    height: 60,
+    backgroundColor: 'white',
+    borderRadius: 60 / 2
+  },
+  TouchableOpacityCamera: {
     position: 'absolute',
     width: 50,
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     left: 30,
-    top: 30
-  },
-
-  FloatingButtonStyle: {
-    resizeMode: 'contain',
-    width: 50,
-    height: 50
+    bottom: 30
   }
 });
 
-const styles2 = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  TouchableOpacityStyle: {
-    position: 'absolute',
-    width: 50,
-    height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    left: 30,
-    top: 100
-  },
+// const styles2 = StyleSheet.create({
+//   container: {
+//     flex: 1
+//   },
+//   TouchableOpacityStyle: {
+//     position: 'absolute',
+//     width: 50,
+//     height: 50,
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//     left: 30,
+//     top: 100
+//   },
 
-  FloatingButtonStyle: {
-    resizeMode: 'contain',
-    width: 50,
-    height: 50
-  }
-});
+//   FloatingButtonStyle: {
+//     resizeMode: 'contain',
+//     width: 50,
+//     height: 50
+//   }
+// });
 
 module.exports = ViroSample;
