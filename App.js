@@ -4,7 +4,6 @@ import {
   createSwitchNavigator,
   createMaterialTopTabNavigator
 } from 'react-navigation';
-import HomeScreen from './screens/Home';
 import AR from './screens/AR';
 import Countries from './screens/Countries';
 import Country from './screens/Country';
