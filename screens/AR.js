@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Alert,
-  Image
-} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Alert, Image } from 'react-native';
 
-import options from "../config";
-import { RNS3 } from "react-native-s3-upload";
-import { ViroARSceneNavigator } from "react-viro";
-import ARScene from "../components/ARScene";
-import ArtPicker from "../components/ArtPicker";
-import EditArtMenu from "../components/EditArtMenu";
+import options from '../config';
+import { RNS3 } from 'react-native-s3-upload';
+import { ViroARSceneNavigator } from 'react-viro';
+import ARScene from '../components/ARScene';
+import ArtPicker from '../components/ArtPicker';
+import EditArtMenu from '../components/EditArtMenu';
 
 export default class ViroSample extends Component {
   state = {
@@ -126,22 +119,22 @@ export default class ViroSample extends Component {
   };
   screenShot = () => {
     this.ARSceneNav.sceneNavigator
-      .takeScreenshot("photo", true)
+      .takeScreenshot('photo', true)
       .then((response) => {
         this.uploadToS3(response.url);
       });
-    Alert.alert("Saved to your camera roll!");
+    Alert.alert('Saved to your camera roll!');
   };
   uploadToS3(url) {
     const file = {
       uri: url,
-      name: "6.png",
-      type: "image/png",
+      name: '6.png',
+      type: 'image/png'
     };
 
     RNS3.put(file, options).then((response) => {
       if (response.status !== 201)
-        throw new Error("Failed to upload image to S3");
+        throw new Error('Failed to upload image to S3');
       console.log(response.body);
     });
   }
