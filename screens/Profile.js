@@ -74,14 +74,14 @@ export default class ProfileScreen extends Component {
             >
               <Button
                 transparent
-                color="green"
+                color="#157759"
                 title="Gallery"
                 onPress={() => this.galleryClicked(0)}
               ></Button>
 
               <Button
                 transparent
-                color="green"
+                color="#157759"
                 title="Screenshot"
                 onPress={() => this.galleryClicked(1)}
               ></Button>
