@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Alert,
-  StyleSheet
+  StyleSheet,
+  ScrollView
 } from 'react-native';
 
 export default class SignUp extends Component {
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 40,
+    marginTop: 20,
     marginBottom: 10
   }
 });
