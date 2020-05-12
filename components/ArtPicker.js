@@ -94,13 +94,8 @@ const styles = StyleSheet.create({
     height: '100%'
   },
   artItem: {
-    // height: 175,
-    // alignItems: 'center',
-    // margin: 3,
-    // borderRadius: 2
     flex: 1,
     margin: 1
-    // flexDirection: row
   },
   header: {
     fontSize: 14,

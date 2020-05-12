@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import {
   StyleSheet,
   Button,
@@ -7,21 +7,21 @@ import {
   Image,
   SafeAreaView,
   ScrollView,
-  RefreshControl,
-} from "react-native";
-import ArtList from "../components/ArtList";
-import * as api from "../utils/apiAWS";
-import * as apiS3 from "../utils/s3Requests";
-import ScreenShotList from "../components/ScreenShotlist";
+  RefreshControl
+} from 'react-native';
+import ArtList from '../components/ArtList';
+import * as api from '../utils/apiAWS';
+import * as apiS3 from '../utils/s3Requests';
+import ScreenShotList from '../components/ScreenShotlist';
 
 export default class ProfileScreen extends Component {
   state = {
-    username: "jessjelly",
+    username: 'jessjelly',
     artData: [],
     screenShotData: [],
     isLoading: true,
     activeIndex: 0,
-    refreshing: false,
+    refreshing: false
   };
 
   componentDidMount() {
@@ -29,13 +29,11 @@ export default class ProfileScreen extends Component {
     this.fetchScreenShot();
   }
 
-  //componentDidMount  - get username of authenticated user & get  their favourite art
-  //artData - need to save all relevant art info for click to work
   render() {
     if (this.state.isLoading)
       return (
         <View style={styles.loading}>
-          <Image source={require("../images/Earth-5.9s-204px.gif")} />
+          <Image source={require('../images/Earth-5.9s-204px.gif')} />
         </View>
       );
     const { username, artData, activeIndex } = this.state;
@@ -50,16 +48,16 @@ export default class ProfileScreen extends Component {
             />
           }
         >
-          <View style={{ alignSelf: "center" }}>
+          <View style={{ alignSelf: 'center' }}>
             <View style={styles.profileImage}>
               <Image
-                source={require("../images/profile.png")}
+                source={require('../images/profile.png')}
                 style={styles.image}
                 resizeMode="center"
               ></Image>
             </View>
-            <View style={(styles.infoContainer, { borderColor: "#DFD8C8" })}>
-              <Text style={[styles.text, { fontSize: 25, fontWeight: "100" }]}>
+            <View style={(styles.infoContainer, { borderColor: '#DFD8C8' })}>
+              <Text style={[styles.text, { fontSize: 25, fontWeight: '100' }]}>
                 {username}'s Gallery
               </Text>
             </View>
@@ -68,10 +66,10 @@ export default class ProfileScreen extends Component {
           <View>
             <View
               style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
+                flexDirection: 'row',
+                justifyContent: 'space-around',
                 borderTopWidth: 1,
-                borderTopColor: "#eae5e5",
+                borderTopColor: '#eae5e5'
               }}
             >
               <Button
@@ -116,7 +114,7 @@ export default class ProfileScreen extends Component {
       apiS3.getScreenShots(i).then((url) => {
         const screenShotObj = { count, url };
         this.setState({
-          screenShotData: [...this.state.screenShotData, screenShotObj],
+          screenShotData: [...this.state.screenShotData, screenShotObj]
         });
       });
       count++;
@@ -143,29 +141,29 @@ export default class ProfileScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: 'white'
   },
   text: {
-    fontFamily: "HelveticaNeue",
-    color: "#52575D",
-    alignSelf: "center",
+    fontFamily: 'HelveticaNeue',
+    color: '#52575D',
+    alignSelf: 'center'
   },
   image: {
     flex: 1,
     aspectRatio: 1.0,
-    resizeMode: "contain",
+    resizeMode: 'contain'
   },
 
   profileImage: {
     width: 200,
     height: 200,
     borderRadius: 25,
-    overflow: "hidden",
-    alignSelf: "center",
+    overflow: 'hidden',
+    alignSelf: 'center'
   },
   infoContainer: {
-    alignSelf: "center",
-    alignItems: "center",
-    marginTop: 16,
-  },
+    alignSelf: 'center',
+    alignItems: 'center',
+    marginTop: 16
+  }
 });

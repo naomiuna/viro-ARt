@@ -13,6 +13,7 @@ export default class ARScene extends Component {
         viroAppProps: [{ chosenArt }, showEditMenu]
       }
     } = this.props;
+
     return (
       <ViroARScene>
         {chosenArt &&
@@ -39,7 +40,6 @@ export default class ARScene extends Component {
                   scale={scale}
                   position={[0, 0, 0]}
                   source={{ uri: rightArt }}
-                  height={1.4}
                   resizeMode={'ScaleToFill'}
                 />
               </ViroNode>
