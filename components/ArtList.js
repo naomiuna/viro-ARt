@@ -75,22 +75,20 @@ class ArtList extends Component {
 
   renderItem = ({ item }) => {
     return (
-      <View style={{ flex: 1, flexDirection: 'column', margin: 2 }}>
-        <TouchableOpacity
-          style={{ flex: 1 / 3, aspectRatio: 1 }}
-          onPress={() => {
-            if (this.props.type === 'country') {
-              this.props.navigation.navigate('ArtCard', {
-                artObject: item
-              });
-            } else {
-              this.showModalFunction(true, item.primaryImage);
-            }
-          }}
-        >
-          <Image style={styles.image} source={{ uri: item.primaryImage }} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => {
+          if (this.props.type === 'country') {
+            this.props.navigation.navigate('ArtCard', {
+              artObject: item
+            });
+          } else {
+            this.showModalFunction(true, item.primaryImage);
+          }
+        }}
+      >
+        <Image style={styles.image} source={{ uri: item.primaryImage }} />
+      </TouchableOpacity>
     );
   };
 }
@@ -120,6 +118,11 @@ const styles = StyleSheet.create({
     top: 9,
     right: 9,
     position: 'absolute'
+  },
+  imageContainer: {
+    flex: 1 / 3,
+    aspectRatio: 1,
+    margin: 2
   }
 });
 

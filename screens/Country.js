@@ -15,13 +15,17 @@ class Country extends Component {
   }
 
   fetchArtUrl = () => {
-    api.getArtIDs(this.state.location).then((objectIDs) => {
-      objectIDs.objectIDs.forEach((id) => {
-        api.getArt(id).then((art) => {
-          this.setState({ artCollection: [...this.state.artCollection, art] });
-        });
+    api.getArtIDs(this.state.location).then(({ objectIDs }) => {
+      let artIDs = objectIDs;
+      if (objectIDs.length > 60) {
+        artIDs = objectIDs.slice(0, 60);
+      }
+      const artData = artIDs.map((id) => {
+        return api.getArt(id);
       });
-      this.setState({ isLoading: false });
+      Promise.all(artData).then((data) => {
+        this.setState({ artCollection: data, isLoading: false });
+      });
     });
   };
 
@@ -34,6 +38,7 @@ class Country extends Component {
       );
     return (
       <View style={this.styles.container}>
+        <Text style={this.styles.header}>{this.state.location}</Text>
         <ArtList
           art={this.state.artCollection}
           navigation={this.props.navigation}
@@ -44,8 +49,15 @@ class Country extends Component {
   }
   styles = StyleSheet.create({
     container: {
-      flex: 1,
-      paddingTop: 22
+      flex: 1
+    },
+    header: {
+      padding: 16,
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: 'white',
+      backgroundColor: '#53ab8b',
+      textAlign: 'center'
     },
     loading: {
       flex: 1,
